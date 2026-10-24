@@ -40,10 +40,20 @@ python3 -m http.server 8080
 # then open http://localhost:8080
 ```
 
-## Deploy
+## Deploy (GitHub Pages)
 
-The site is served by GitHub Pages straight from the `main` branch root.
-Pushing to `main` republishes it — nothing to build.
+The site is plain static files, so it deploys straight from the repo root with no build step.
+
+1. Open **Settings → Pages** for this repository.
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+3. Pick branch **`main`** and folder **`/ (root)`**, then **Save**.
+
+About a minute later the site is live at:
+
+**https://jaydenwhite7714.github.io/Portfolio/**
+
+Every push to `main` republishes it automatically. `404.html` is picked up as the
+custom not-found page, and `.nojekyll` stops Jekyll from touching the files.
 
 ## Accessibility & performance notes
 
