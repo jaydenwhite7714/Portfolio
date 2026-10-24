@@ -55,6 +55,16 @@ About a minute later the site is live at:
 Every push to `main` republishes it automatically. `404.html` is picked up as the
 custom not-found page, and `.nojekyll` stops Jekyll from touching the files.
 
+## Making it yours
+
+A few things are worth swapping for real values:
+
+- **Discord handle** — `data-handle="jaydenwhite"` on the `#copyDiscord` button in `index.html`.
+- **Stats** — the four numbers in the hero (`data-count="48"` etc.) and the copy under "Selected work".
+- **Projects** — the six `.proj` cards in `index.html` plus the matching entries in the `projects` object near the bottom of `assets/js/main.js`.
+- **UI Lab screens** — the markup lives under `#panel-*` in `index.html`; the captions are in the `labMeta` object in `assets/js/main.js`.
+- **Code samples** — the three `<pre>` panels in `#code`.
+
 ## Accessibility & performance notes
 
 - Keyboard operable: tabs support arrow keys, project cards open with Enter/Space, the modal traps focus and closes on Esc.

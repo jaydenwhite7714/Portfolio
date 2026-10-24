@@ -6,6 +6,7 @@
 <title>Jayden White — Roblox UI Designer &amp; Luau Scripter</title>
 <meta name="description" content="Jayden White designs clean, game-ready interfaces in Roblox Studio and scripts the systems behind them — combat, inventory, shops and save data." />
 <meta name="theme-color" content="#07080d" />
+<script>document.documentElement.classList.add("js");</script>
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Jayden White — Roblox UI Designer &amp; Luau Scripter" />
 <meta property="og:description" content="Clean HUDs, shops and menus — wired to real combat, inventory and save systems." />
@@ -171,11 +172,13 @@
       </a>
       <a class="btn btn--primary btn--sm" href="#contact">Hire me</a>
       <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
-        <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="ico nav__burger-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="ico nav__burger-close" aria-hidden="true"><use href="#i-close"/></svg>
       </button>
     </div>
   </div>
 
+  <div class="nav__scrim" id="navScrim" hidden></div>
   <div class="drawer" id="navDrawer" hidden>
     <a href="#work">Work</a>
     <a href="#lab">UI Lab</a>

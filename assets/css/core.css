@@ -247,14 +247,14 @@ code { font-family: var(--mono); }
 }
 .spotlight.is-on { opacity: 1; }
 
-/* ---------- reveal ---------- */
-.reveal {
+/* ---------- reveal (only when JS is running, so content is never stuck hidden) ---------- */
+.js .reveal {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
   transition-delay: var(--d, 0s);
 }
-.reveal.is-in {
+.js .reveal.is-in {
   opacity: 1;
   transform: none;
 }
@@ -275,6 +275,8 @@ code { font-family: var(--mono); }
 }
 
 .nav__inner {
+  position: relative;
+  z-index: 96;
   height: var(--nav-h);
   display: flex;
   align-items: center;
@@ -354,6 +356,7 @@ code { font-family: var(--mono); }
 
 .nav__burger {
   display: none;
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 11px;
@@ -361,16 +364,36 @@ code { font-family: var(--mono); }
   color: var(--ink);
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
 }
+.nav__burger .ico { position: absolute; transition: opacity 0.25s, transform 0.3s var(--ease); }
+.nav__burger-close { opacity: 0; transform: rotate(-45deg) scale(0.8); }
+.nav__burger[aria-expanded="true"] .nav__burger-open { opacity: 0; transform: rotate(45deg) scale(0.8); }
+.nav__burger[aria-expanded="true"] .nav__burger-close { opacity: 1; transform: none; }
+
+.nav__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(4, 5, 9, 0.6);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nav__scrim[hidden] { display: none; }
+.nav__scrim.is-open { opacity: 1; }
 
 .drawer {
+  position: relative;
+  z-index: 95;
   display: none;
   flex-direction: column;
-  padding: 14px var(--gutter) 22px;
-  gap: 4px;
-  background: rgba(8, 9, 15, 0.97);
+  padding: 10px var(--gutter) 22px;
+  gap: 2px;
+  background: rgba(8, 9, 15, 0.98);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
 }
 .drawer[hidden] { display: none !important; }
 .drawer.is-open { display: flex; }
@@ -379,7 +402,22 @@ code { font-family: var(--mono); }
   font-size: 15px;
   color: var(--ink-2);
   border-bottom: 1px solid var(--line-soft);
+  opacity: 0;
+  transform: translateY(-6px);
 }
+.drawer.is-open a {
+  animation: drawerIn 0.4s var(--ease-out) forwards;
+}
+.drawer.is-open a:nth-child(2) { animation-delay: 0.03s; }
+.drawer.is-open a:nth-child(3) { animation-delay: 0.06s; }
+.drawer.is-open a:nth-child(4) { animation-delay: 0.09s; }
+.drawer.is-open a:nth-child(5) { animation-delay: 0.12s; }
+.drawer.is-open a:nth-child(6) { animation-delay: 0.15s; }
+@keyframes drawerIn {
+  to { opacity: 1; transform: none; }
+}
+/* the CTA is the last child, so let it inherit the stagger instead of the hidden state */
+.drawer .drawer__cta { opacity: 1; transform: none; animation: none; }
 .drawer a:last-child { border-bottom: 0; }
 .drawer__cta {
   margin-top: 10px;

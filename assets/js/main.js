@@ -59,19 +59,31 @@
   /* ------------------------------------------------------------------ */
   const burger = $("#navBurger");
   const drawer = $("#navDrawer");
+  const scrim = $("#navScrim");
 
   function setDrawer(open) {
     if (!burger || !drawer) return;
     burger.setAttribute("aria-expanded", String(open));
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.documentElement.style.overflow = open && window.innerWidth <= 960 ? "hidden" : "";
     if (open) {
       drawer.hidden = false;
+      if (scrim) {
+        scrim.hidden = false;
+        requestAnimationFrame(() => scrim.classList.add("is-open"));
+      }
       requestAnimationFrame(() => drawer.classList.add("is-open"));
     } else {
       drawer.classList.remove("is-open");
       drawer.hidden = true;
+      if (scrim) {
+        scrim.classList.remove("is-open");
+        scrim.hidden = true;
+      }
     }
   }
+
+  scrim?.addEventListener("click", () => setDrawer(false));
 
   burger?.addEventListener("click", () => {
     setDrawer(burger.getAttribute("aria-expanded") !== "true");
@@ -413,7 +425,16 @@
   copyBtn?.addEventListener("click", async () => {
     const ok = await copyText(activeCodeText());
     if (!ok) {
-      toast("Couldn't copy — select the code manually.");
+      // last resort: select the snippet so ⌘/Ctrl + C is one keystroke away
+      const panel = codePanels.find((p) => !p.hidden);
+      if (panel) {
+        const range = document.createRange();
+        range.selectNodeContents(panel);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      toast("Press ⌘/Ctrl + C — the snippet is selected.");
       return;
     }
     copyBtn.classList.add("is-copied");
