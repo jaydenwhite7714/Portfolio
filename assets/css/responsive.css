@@ -32,19 +32,29 @@
   .sec-sub { padding-bottom: 0; max-width: 62ch; }
 
   .lab__stage { grid-template-columns: 1fr; }
+
+  /* bar becomes two rows so the tabs and the device switch both breathe */
+  .lab__bar { flex-wrap: wrap; row-gap: 8px; }
+  .lab__tabs { width: 100%; }
+  .lab__tools { width: 100%; justify-content: flex-end; gap: 12px; }
+
   .lab__caption {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 6px 30px;
+    align-items: start;
     border-left: 0;
     border-top: 1px solid var(--line-soft);
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 18px 20px;
+    padding: 20px 22px;
   }
-  .lab__caption-head { width: 100%; margin-bottom: 0; }
+  .lab__caption-eyebrow { grid-column: 1 / -1; margin-bottom: 6px; }
+  .lab__caption-head { grid-column: 1; margin-bottom: 2px; }
   .lab__caption-head span:last-child { margin-left: auto; }
-  .lab__caption p { margin-bottom: 0; flex: 1 1 320px; }
-  .lab__caption-foot { margin-top: 0; grid-template-columns: auto auto auto; }
+  .lab__caption p { grid-column: 1; margin-bottom: 0; }
+  .lab__spec { grid-column: 2; grid-row: 2 / span 2; margin-bottom: 0; }
+  .lab__spec > div:first-child { border-top: 0; padding-top: 0; }
+  .lab__caption-foot { grid-column: 1 / -1; margin-top: 14px; grid-template-columns: 1fr auto auto; }
+  .lab__keys { display: none; }
 
   .about { grid-template-columns: 1fr; gap: 46px; }
   .about__visual { order: 2; max-width: 430px; width: 100%; margin-inline: auto; }
@@ -120,43 +130,32 @@
   .projects { grid-template-columns: 1fr; gap: 14px; }
   .proj__preview { height: 164px; }
 
+  .lab__viewport[data-device="tablet"] { padding: 18px 14px 20px; }
+  .lab__viewport[data-device="tablet"] .screen { width: min(100%, 300px); aspect-ratio: 3 / 3.7; }
+  .lab__viewport[data-device="phone"] { padding: 18px 14px 20px; }
+  .lab__viewport[data-device="phone"] .screen { width: min(100%, 250px); aspect-ratio: 9 / 17; }
+
   .lab__bar { flex-wrap: wrap; gap: 10px; padding: 10px 12px; }
   .lab__hint { display: none; }
+  .lab__tools { gap: 8px; margin-left: auto; }
+  .lab__bar .lab__hint { display: inline-flex; }
+  .seg-device__btn span { display: none; }
+  .seg-device__btn { padding: 7px 9px; }
+  .seg-device__btn .ico { width: 15px; height: 15px; }
   .lab__tab { padding: 7px 9px; font-size: 11.5px; gap: 5px; }
+  .lab__tabs { width: 100%; }
   .lab__tab .ico { width: 12px; height: 12px; }
   .lab__caption-foot { align-items: center; }
   .lab__caption-foot .tags { align-content: flex-start; }
 
   .screen { aspect-ratio: 4 / 4.5; }
-  .screen > .lab__panel { font-size: clamp(7.5px, 2.9cqw, 15px); }
-  .screen__hud-corner { display: none; }
-
-  /* portrait HUD: stack the top row instead of letting it collide */
-  .hud__currency { top: 1.1em; right: 1.1em; }
-  .hud__vitals { top: 3.4em; left: 1.1em; right: 1.1em; width: auto; }
-  .hud__boss { top: 8.1em; left: 1.1em; right: 1.1em; width: auto; transform: none; }
-  .hud__quest { top: auto; bottom: 7.6em; left: 1.1em; right: 1.1em; }
-  .hud__combo { top: 34%; right: 1.1em; }
-  .hud__combo b { font-size: 2.2em; }
-  .hud__dmg { left: auto; right: 1.6em; top: 46%; font-size: 1.9em; }
-  .hud__dmg--crit { left: auto; right: 1.6em; top: 56%; font-size: 0.66em; }
-  .hud__minimap { display: none; }
-  .hud__hotbar { bottom: 1.1em; }
-  .slot { width: 2.9em; height: 2.9em; }
-  .hud__hotbar { bottom: 1.6em; }
-
+  .lab__viewport[data-device="desktop"] .screen { aspect-ratio: 4 / 4.5; }
   .floating { display: none; }
 
-  .shopui__grid { grid-template-columns: repeat(2, 1fr); }
-  .invui__body { grid-template-columns: 1fr; }
-  .invui__detail { display: none; }
-  .setui { grid-template-columns: 1fr; }
-  .setui__nav { display: none; }
-  .shopui__foot, .invui__foot, .questui__foot { font-size: 0.6em; }
-
-  .lab__caption { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .lab__caption p { flex: none; }
-  .lab__caption-foot { width: 100%; grid-template-columns: 1fr auto auto; }
+  .lab__caption { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .lab__caption-head { width: 100%; }
+  .lab__spec { width: 100%; }
+  .lab__caption-foot { width: 100%; grid-template-columns: 1fr auto auto; margin-top: 4px; }
 
   .code-win__bar { gap: 8px; padding: 0 10px; }
   .code-copy span { display: none; }
@@ -174,6 +173,8 @@
   .contact__meta { font-size: 10.5px; gap: 8px; }
 
   .footer { padding-top: 40px; }
+  .footer__wordmark { padding-top: 4px; }
+  .footer__wordmark span { font-size: clamp(2.6rem, 17vw, 6rem); }
   .footer__links { grid-template-columns: repeat(2, 1fr); gap: 22px; }
   .footer__bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
 
@@ -194,7 +195,6 @@
   .lab__tab .ico { display: none; }
   .lab__tab { padding: 7px 8px; font-size: 11px; }
   .lab__tabs { gap: 1px; }
-  .hud__combo b { font-size: 2.2em; }
   .screen { aspect-ratio: 3 / 3.6; }
   .shopui { width: 96%; }
 }

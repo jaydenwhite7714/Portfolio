@@ -129,6 +129,12 @@
     <symbol id="i-monitor" viewBox="0 0 24 24">
       <rect x="2.8" y="4" width="18.4" height="12.4" rx="2.2"/><path d="M9 20.4h6M12 16.4v4"/>
     </symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24">
+      <rect x="4.6" y="2.8" width="14.8" height="18.4" rx="2.4"/><path d="M11 18.4h2"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <rect x="6.6" y="2.4" width="10.8" height="19.2" rx="2.6"/><path d="M10.6 5.2h2.8"/>
+    </symbol>
     <symbol id="i-user" viewBox="0 0 24 24">
       <circle cx="12" cy="8.2" r="3.8"/><path d="M4.6 20.2a7.4 7.4 0 0 1 14.8 0"/>
     </symbol>
@@ -158,6 +164,7 @@
     </a>
 
     <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <span class="nav__pill" id="navPill" aria-hidden="true"></span>
       <a href="#work" class="nav__link">Work</a>
       <a href="#lab" class="nav__link">UI Lab</a>
       <a href="#code" class="nav__link">Code</a>
@@ -210,7 +217,7 @@
       </a>
 
       <h1 class="hero__title reveal" style="--d:.06s">
-        Roblox interfaces that feel
+        Roblox <span class="hero__hl">interfaces</span> that feel
         <span class="grad">finished.</span>
       </h1>
 
@@ -408,7 +415,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="reveal">
-        <span class="eyebrow"><i></i>What I do</span>
+        <span class="eyebrow"><i></i><b>01</b> What I do</span>
         <h2 class="sec-title">Two jobs, one person.<br /><span class="muted">Design and script, together.</span></h2>
       </div>
       <p class="sec-sub reveal" style="--d:.08s">
@@ -420,6 +427,7 @@
 
     <div class="cards">
       <article class="svc reveal" style="--d:.02s">
+        <span class="svc__num" aria-hidden="true">01</span>
         <div class="svc__icon"><svg class="ico"><use href="#i-layers"/></svg></div>
         <h3>Game UI &amp; UX</h3>
         <p>HUDs, shops, inventories, quest logs and menus that stay readable at any resolution.</p>
@@ -432,6 +440,7 @@
       </article>
 
       <article class="svc reveal" style="--d:.08s">
+        <span class="svc__num" aria-hidden="true">02</span>
         <div class="svc__icon"><svg class="ico"><use href="#i-sword"/></svg></div>
         <h3>Combat &amp; Abilities</h3>
         <p>Melee combos, projectiles, cooldowns and hit validation that can't be faked on the client.</p>
@@ -444,6 +453,7 @@
       </article>
 
       <article class="svc reveal" style="--d:.14s">
+        <span class="svc__num" aria-hidden="true">03</span>
         <div class="svc__icon"><svg class="ico"><use href="#i-database"/></svg></div>
         <h3>Data &amp; Progression</h3>
         <p>Save systems that survive a server crash, plus the XP curves and quest chains on top.</p>
@@ -456,6 +466,7 @@
       </article>
 
       <article class="svc reveal" style="--d:.2s">
+        <span class="svc__num" aria-hidden="true">04</span>
         <div class="svc__icon"><svg class="ico"><use href="#i-sliders"/></svg></div>
         <h3>Polish &amp; Tooling</h3>
         <p>The last 10% that makes a game feel expensive — plus the admin tools to keep it running.</p>
@@ -475,7 +486,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="reveal">
-        <span class="eyebrow"><i></i>Selected work</span>
+        <span class="eyebrow"><i></i><b>02</b> Selected work</span>
         <h2 class="sec-title">Systems I've built.<br /><span class="muted">Six of them, up close.</span></h2>
       </div>
       <p class="sec-sub reveal" style="--d:.08s">
@@ -636,7 +647,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="reveal">
-        <span class="eyebrow"><i></i>UI Lab</span>
+        <span class="eyebrow"><i></i><b>03</b> UI Lab</span>
         <h2 class="sec-title">Interfaces, up close.<br /><span class="muted">Every pixel hand-placed.</span></h2>
       </div>
       <p class="sec-sub reveal" style="--d:.08s">
@@ -665,10 +676,27 @@
             <svg class="ico ico--xs"><use href="#i-sliders"/></svg> Settings
           </button>
         </div>
-        <span class="lab__hint"><i></i>Interactive preview</span>
+        <div class="lab__tools">
+          <span class="lab__hint" title="Live frame size"><i></i><span id="labDims">1200 × 675</span></span>
+          <div class="seg-device" role="group" aria-label="Preview viewport size">
+            <button class="seg-device__btn is-active" data-device="desktop" aria-pressed="true" title="Desktop view">
+              <svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg>
+              <span>Desktop</span>
+            </button>
+            <button class="seg-device__btn" data-device="tablet" aria-pressed="false" title="Tablet view">
+              <svg class="ico" aria-hidden="true"><use href="#i-tablet"/></svg>
+              <span>Tablet</span>
+            </button>
+            <button class="seg-device__btn" data-device="phone" aria-pressed="false" title="Phone view">
+              <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>
+              <span>Phone</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="lab__stage">
+        <div class="lab__viewport" data-device="desktop">
         <div class="screen">
           <div class="screen__scene" aria-hidden="true">
             <div class="sc-sky"></div>
@@ -997,9 +1025,20 @@
             <span class="screen__ping"><i></i> 24 ms</span>
             <span class="screen__server">US-East · 41 players</span>
           </div>
+
+          <div class="screen__status" aria-hidden="true">
+            <span class="screen__time">9:41</span>
+            <span class="screen__signals">
+              <i class="sig sig--1"></i><i class="sig sig--2"></i><i class="sig sig--3"></i>
+              <i class="bat"></i>
+            </span>
+          </div>
+          <div class="screen__home" aria-hidden="true"></div>
+        </div>
         </div>
 
         <aside class="lab__caption" aria-live="polite">
+          <span class="lab__caption-eyebrow">Preview details</span>
           <div class="lab__caption-head">
             <span class="lab__caption-dot"></span>
             <b id="labName">Combat HUD</b>
@@ -1016,6 +1055,7 @@
             <button class="lab__prev" id="labPrev" aria-label="Previous screen"><svg class="ico"><use href="#i-arrow"/></svg></button>
             <button class="lab__next" id="labNext" aria-label="Next screen"><svg class="ico"><use href="#i-arrow"/></svg></button>
           </div>
+          <p class="lab__keys"><kbd>&larr;</kbd><kbd>&rarr;</kbd> switch screens</p>
         </aside>
       </div>
     </div>
@@ -1027,7 +1067,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="reveal">
-        <span class="eyebrow"><i></i>Under the hood</span>
+        <span class="eyebrow"><i></i><b>04</b> Under the hood</span>
         <h2 class="sec-title">The part players never see.<br /><span class="muted">It still has to be clean.</span></h2>
       </div>
       <p class="sec-sub reveal" style="--d:.08s">
@@ -1164,7 +1204,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="reveal">
-        <span class="eyebrow"><i></i>How I work</span>
+        <span class="eyebrow"><i></i><b>05</b> How I work</span>
         <h2 class="sec-title">From messy idea to<br /><span class="muted">playable in a week.</span></h2>
       </div>
       <p class="sec-sub reveal" style="--d:.08s">
@@ -1250,7 +1290,7 @@
     </div>
 
     <div class="about__copy">
-      <span class="eyebrow reveal"><i></i>About me</span>
+      <span class="eyebrow reveal"><i></i><b>06</b> About me</span>
       <h2 class="sec-title reveal" style="--d:.05s">I got into scripting to make<br />a sword fight. I stayed for the UI.</h2>
 
       <p class="reveal" style="--d:.1s">
@@ -1303,7 +1343,7 @@
       <div class="contact__glow" aria-hidden="true"></div>
       <div class="contact__grid-bg" aria-hidden="true"></div>
 
-      <span class="eyebrow eyebrow--center contact__eyebrow"><i></i>Let's talk</span>
+      <span class="eyebrow eyebrow--center contact__eyebrow"><i></i><b>07</b> Let's talk</span>
       <h2 class="contact__title">Got a game that needs<br /><span class="grad">a face?</span></h2>
       <p class="contact__sub">
         Tell me what you're building and what's missing. I'll reply with a scope,
@@ -1314,9 +1354,9 @@
         <a class="btn btn--primary btn--lg" href="https://github.com/jaydenwhite7714" target="_blank" rel="noopener">
           <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> Message me on GitHub
         </a>
-        <button class="btn btn--ghost btn--lg" id="copyDiscord" data-handle="jaydenwhite">
+        <button class="btn btn--ghost btn--lg" id="copyDiscord" data-handle="jayden_7714">
           <svg class="ico" aria-hidden="true"><use href="#i-discord"/></svg>
-          <span class="copy-label">Discord: jaydenwhite</span>
+          <span class="copy-label">Discord: jayden_7714</span>
           <svg class="ico ico--xs copy-ico" aria-hidden="true"><use href="#i-copy"/></svg>
         </button>
       </div>
@@ -1369,6 +1409,10 @@
     </nav>
   </div>
 
+  <div class="footer__wordmark" aria-hidden="true">
+    <span>Jayden White</span>
+  </div>
+
   <div class="wrap footer__bottom">
     <span>© <span id="year">2026</span> Jayden White. Built by hand with HTML, CSS &amp; vanilla JS.</span>
     <span class="footer__host">Hosted on GitHub Pages <i class="dot-live"></i></span>
@@ -1378,7 +1422,7 @@
 <!-- ============ PROJECT MODAL ============ -->
 <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
   <div class="modal__backdrop" data-close></div>
-  <div class="modal__panel" role="document">
+  <div class="modal__panel" role="document" tabindex="-1">
     <button class="modal__close" data-close aria-label="Close"><svg class="ico"><use href="#i-close"/></svg></button>
     <div class="modal__hero" id="modalHero" aria-hidden="true"></div>
     <div class="modal__content">
@@ -1404,6 +1448,10 @@
     </div>
   </div>
 </div>
+
+<button class="to-top" id="toTop" aria-label="Back to top" tabindex="-1">
+  <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+</button>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 

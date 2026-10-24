@@ -9,9 +9,9 @@ Static HTML, CSS and vanilla JavaScript — no build step, no frameworks.
 
 - **Hero** with an interactive Roblox Studio window mock (Explorer, Properties, Output, and a working-looking HUD).
 - **Selected work** — six project cards, each opening a detail modal with scope, stack and numbers.
-- **UI Lab** — five live, interactive recreations of Roblox interfaces (Combat HUD, Shop, Inventory, Quest Log, Settings). They scale with container queries so they look right on phones.
+- **UI Lab** — five live, interactive recreations of Roblox interfaces (Combat HUD, Shop, Inventory, Quest Log, Settings), with a **Desktop / Tablet / Phone switcher** that re-lays-out the mock live using container queries — the same breakpoint logic a real Roblox UI needs.
 - **Code samples** — tabbed Luau snippets with copy-to-clipboard.
-- **Process, About and Contact**, plus scroll reveals, a cursor spotlight, magnetic buttons and a 3D tilt on the Studio mock.
+- **Process, About and Contact**, plus scroll reveals, a cursor spotlight, a sliding nav pill, magnetic buttons, a pointer-tracking glow on project cards, a back-to-top control and a 3D tilt on the Studio mock.
 
 ## Structure
 
@@ -59,7 +59,7 @@ custom not-found page, and `.nojekyll` stops Jekyll from touching the files.
 
 A few things are worth swapping for real values:
 
-- **Discord handle** — `data-handle="jaydenwhite"` on the `#copyDiscord` button in `index.html`.
+- **Discord handle** — `data-handle="jayden_7714"` on the `#copyDiscord` button in `index.html`.
 - **Stats** — the four numbers in the hero (`data-count="48"` etc.) and the copy under "Selected work".
 - **Projects** — the six `.proj` cards in `index.html` plus the matching entries in the `projects` object near the bottom of `assets/js/main.js`.
 - **UI Lab screens** — the markup lives under `#panel-*` in `index.html`; the captions are in the `labMeta` object in `assets/js/main.js`.

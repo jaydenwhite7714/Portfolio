@@ -20,23 +20,57 @@
     .map((link) => $(link.getAttribute("href")))
     .filter(Boolean);
 
+  const navPill = $("#navPill");
+  const navList = $("#navLinks");
+  const toTop = $("#toTop");
+
+  // slide the pill under the active link
+  function movePill(link) {
+    if (!navPill || !navList) return;
+    if (!link) {
+      navPill.classList.remove("is-on");
+      return;
+    }
+    const a = link.getBoundingClientRect();
+    const b = navList.getBoundingClientRect();
+    navPill.style.width = a.width + "px";
+    navPill.style.transform = `translateX(${a.left - b.left - 5}px)`;
+    navPill.classList.add("is-on");
+  }
+
+  let activeLink = null;
   let ticking = false;
   function onScroll() {
     const y = window.scrollY;
     if (nav) nav.classList.toggle("is-stuck", y > 18);
+    if (toTop) {
+      const on = y > window.innerHeight * 0.9;
+      toTop.classList.toggle("is-on", on);
+      toTop.tabIndex = on ? 0 : -1;
+      toTop.setAttribute("aria-hidden", String(!on));
+    }
 
     const max = document.documentElement.scrollHeight - window.innerHeight;
     if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
 
-    // active section
+    // active section (nothing is "active" while the hero fills the screen)
     const probe = y + window.innerHeight * 0.32;
-    let current = sections[0];
-    sections.forEach((section) => {
-      if (section.offsetTop <= probe) current = section;
-    });
+    let current = null;
+    if (y > 160) {
+      current = sections[0];
+      sections.forEach((section) => {
+        if (section.offsetTop <= probe) current = section;
+      });
+    }
     navLinks.forEach((link) => {
-      link.classList.toggle("is-active", current && link.getAttribute("href") === "#" + current.id);
+      link.classList.toggle("is-active", !!current && link.getAttribute("href") === "#" + current.id);
     });
+
+    const nextActive = navLinks.find((l) => l.classList.contains("is-active")) || null;
+    if (nextActive !== activeLink) {
+      activeLink = nextActive;
+      movePill(activeLink);
+    }
 
     ticking = false;
   }
@@ -51,7 +85,17 @@
     },
     { passive: true }
   );
-  window.addEventListener("resize", onScroll, { passive: true });
+  window.addEventListener(
+    "resize",
+    () => {
+      onScroll();
+      movePill(activeLink);
+    },
+    { passive: true }
+  );
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => movePill(activeLink));
+  }
   onScroll();
 
   /* ------------------------------------------------------------------ */
@@ -84,6 +128,16 @@
   }
 
   scrim?.addEventListener("click", () => setDrawer(false));
+
+  navLinks.forEach((link) => {
+    link.addEventListener("pointerenter", () => movePill(link));
+  });
+  navList?.addEventListener("pointerleave", () => movePill(activeLink));
+
+  /* back to top */
+  toTop?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  });
 
   burger?.addEventListener("click", () => {
     setDrawer(burger.getAttribute("aria-expanded") !== "true");
@@ -224,6 +278,19 @@
     visual.addEventListener("pointerleave", () => {
       studio.style.setProperty("--ry", "0deg");
       studio.style.setProperty("--rx", "0deg");
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* 7b. project card pointer glow                                       */
+  /* ------------------------------------------------------------------ */
+  if (canHover && !reduceMotion) {
+    $$(".proj").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--cx", ((e.clientX - r.left) / r.width) * 100 + "%");
+        card.style.setProperty("--cy", ((e.clientY - r.top) / r.height) * 100 + "%");
+      });
     });
   }
 
@@ -372,6 +439,53 @@
   });
 
   /* ------------------------------------------------------------------ */
+  /* 8b. UI Lab device switcher                                          */
+  /* ------------------------------------------------------------------ */
+  const deviceBtns = $$(".seg-device__btn");
+  const labViewport = $(".lab__viewport");
+  const dimLabel = $("#labDims");
+  const screenEl = $(".screen");
+
+  const deviceNames = { desktop: "Desktop", tablet: "Tablet", phone: "Phone" };
+
+  function updateDims() {
+    if (!screenEl || !dimLabel) return;
+    const rect = screenEl.getBoundingClientRect();
+    const device = labViewport ? labViewport.dataset.device : "desktop";
+    const w = Math.round(rect.width);
+    const h = Math.round(rect.height);
+    dimLabel.textContent = `${w} × ${h}`;
+    dimLabel.parentElement.setAttribute(
+      "title",
+      `${deviceNames[device] || "Desktop"} frame · ${w} × ${h}`
+    );
+  }
+
+  function setDevice(device) {
+    if (!labViewport) return;
+    labViewport.dataset.device = device;
+    deviceBtns.forEach((btn) => {
+      const on = btn.dataset.device === device;
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-pressed", String(on));
+    });
+    // the frame resizes with a transition, so remeasure once it settles
+    updateDims();
+    window.clearTimeout(setDevice._t);
+    setDevice._t = window.setTimeout(updateDims, 460);
+  }
+
+  deviceBtns.forEach((btn) => {
+    btn.addEventListener("click", () => setDevice(btn.dataset.device));
+  });
+
+  if (screenEl && "ResizeObserver" in window) {
+    new ResizeObserver(updateDims).observe(screenEl);
+  }
+  window.addEventListener("resize", updateDims, { passive: true });
+  updateDims();
+
+  /* ------------------------------------------------------------------ */
   /* 9. code tabs + copy                                                 */
   /* ------------------------------------------------------------------ */
   const codeTabs = $$(".code-tab");
@@ -487,6 +601,7 @@
   const projects = {
     combat: {
       chip: "Gameplay · UI",
+      icon: "i-sword",
       title: "Vanguard Combat",
       accent: "#8b7bff",
       lede: "An ability-based melee combat system built around one rule: the server decides, the client only predicts. Eight abilities, combo chains, i-frames and a HUD that tells the player everything they need without covering the fight.",
@@ -507,6 +622,7 @@
     },
     shop: {
       chip: "UI · Commerce",
+      icon: "i-coin",
       title: "Aether Shop",
       accent: "#38e2c8",
       lede: "A storefront that stays snappy with 26 items on screen. Rarity tiers drive the colour system, tooltips are pre-built and reused, and the purchase flow confirms on the server before anything is taken away.",
@@ -527,6 +643,7 @@
     },
     inventory: {
       chip: "UI · Systems",
+      icon: "i-bag",
       title: "Grid Inventory",
       accent: "#ffb457",
       lede: "A 48-slot grid with drag-and-drop, stacking and equipment slots. One data table is the source of truth; the interface renders from it, so there is no state to desync when the server sends an update mid-drag.",
@@ -547,6 +664,7 @@
     },
     save: {
       chip: "Backend",
+      icon: "i-database",
       title: "SaveCore",
       accent: "#5ec8ff",
       lede: "The unglamorous module that keeps a game alive. Retries with exponential backoff, autosave, session locking to stop duplicate-session overwrites, and schema migrations so old saves keep working after an update.",
@@ -567,6 +685,7 @@
     },
     boss: {
       chip: "Gameplay",
+      icon: "i-target",
       title: "Boss Rush",
       accent: "#ff6b9d",
       lede: "Five bosses, three phases each, with attacks telegraphed on the ground before they land. The fight reads like a conversation: the boss shows you what's coming, you answer with a dodge or a block, and the loot rolls at the end.",
@@ -587,6 +706,7 @@
     },
     toolkit: {
       chip: "Tooling",
+      icon: "i-code",
       title: "Studio Toolkit",
       accent: "#a6e85f",
       lede: "The panel my testers keep open. Live server stats, a player inspector, a command console and one-click test tools, all gated by role so a regular player never sees it.",
@@ -627,15 +747,15 @@
       radial-gradient(420px 200px at 88% 30%, ${data.accent}22, transparent 75%),
       linear-gradient(160deg, #141926, #0a0c13)`;
 
-    // reuse the card's preview art as the modal banner
-    modalHero.innerHTML = "";
-    const art = card && $(".proj__preview", card);
-    if (art) {
-      const clone = art.cloneNode(true);
-      clone.classList.add("modal__preview");
-      clone.removeAttribute("aria-hidden");
-      modalHero.appendChild(clone);
-    }
+    // decorative banner: accent wash, grid and the project's icon
+    modalHero.innerHTML = `
+      <span class="modal__art" style="--m-accent:${data.accent}">
+        <span class="modal__art-grid"></span>
+        <span class="modal__art-ring"></span>
+        <span class="modal__art-icon">
+          <svg class="ico" aria-hidden="true"><use href="#${data.icon || "i-sparkle"}"/></svg>
+        </span>
+      </span>`;
     modalChip.textContent = data.chip;
     modalTitle.textContent = data.title;
     modalLede.textContent = data.lede;
@@ -649,7 +769,7 @@
     document.body.style.overflow = "hidden";
     requestAnimationFrame(() => {
       modal.classList.add("is-open");
-      $(".modal__close", modal)?.focus();
+      $(".modal__panel", modal)?.focus({ preventScroll: true });
     });
   }
 
