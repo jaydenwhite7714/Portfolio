@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jayden White — Roblox UI Designer &amp; Luau Scripter</title>
+<meta name="description" content="Jayden White designs clean, game-ready interfaces in Roblox Studio and scripts the systems behind them — combat, inventory, shops and save data." />
+<meta name="theme-color" content="#07080d" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Jayden White — Roblox UI Designer &amp; Luau Scripter" />
+<meta property="og:description" content="Clean HUDs, shops and menus — wired to real combat, inventory and save systems." />
+<meta property="og:url" content="https://jaydenwhite7714.github.io/Portfolio/" />
+<meta property="og:image" content="https://jaydenwhite7714.github.io/Portfolio/assets/img/og.jpg" />
+<meta property="og:image:width" content="1680" />
+<meta property="og:image:height" content="882" />
+<meta property="og:image:alt" content="Jayden White — Roblox UI designer and Luau scripter portfolio" />
+<meta property="og:site_name" content="Jayden White" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Jayden White — Roblox UI Designer &amp; Luau Scripter" />
+<meta name="twitter:description" content="Clean HUDs, shops and menus — wired to real combat, inventory and save systems." />
+<meta name="twitter:image" content="https://jaydenwhite7714.github.io/Portfolio/assets/img/og.jpg" />
+<link rel="canonical" href="https://jaydenwhite7714.github.io/Portfolio/" />
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+<link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/sora-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/css/core.css" />
+<link rel="stylesheet" href="assets/css/sections.css" />
+<link rel="stylesheet" href="assets/css/uilab.css" />
+<link rel="stylesheet" href="assets/css/code.css" />
+<link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- scroll progress -->
+<div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+
+<!-- mouse spotlight -->
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="i-sword" viewBox="0 0 24 24">
+      <path d="M19.6 4.4 11.2 12.8M19.6 4.4h-3.3M19.6 4.4v3.3M9.6 11.6l2.8 2.8M11.6 13.4 7 18M6.4 20.4 8.8 18"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 3.2 19 6v5.6c0 4.3-2.9 7.6-7 9.4-4.1-1.8-7-5.1-7-9.4V6l7-2.8Z"/>
+    </symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24">
+      <path d="M12 3.2s5.2 4.3 5.2 8.7a5.2 5.2 0 0 1-10.4 0c0-2.3 1-4 1-4s.3 2.6 1.6 3.2c-.2-2.6 2.6-5 2.6-7.9Z"/>
+    </symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24">
+      <path d="M13.4 3 5.5 13.8h4.9L9.2 21l8.3-11.2h-5L13.4 3Z"/>
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24">
+      <path d="M4.8 8.2h14.4l-1 12H5.8l-1-12ZM9 8.2V6a3 3 0 0 1 6 0v2.2"/>
+    </symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24">
+      <path d="M12 3v18M15.4 7.2c0-1.4-1.5-2.2-3.4-2.2s-3.4.8-3.4 2.4c0 3.5 6.8 1.8 6.8 5.4 0 1.6-1.5 2.4-3.4 2.4s-3.4-.8-3.4-2.4"/>
+    </symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3.1"/>
+      <path d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/>
+    </symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24">
+      <path d="M12 3.2l1.9 5.3 5.3 1.9-5.3 1.9L12 17.6l-1.9-5.3L4.8 10.4l5.3-1.9L12 3.2Z"/>
+      <path d="M18.4 15.6l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7.7-1.9Z"/>
+    </symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24">
+      <path d="M4 4v16h16M7.8 16.5v-4.2M12 16.5V8.2M16.2 16.5v-2.6"/>
+    </symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24">
+      <path d="M12 3 3.4 7.6 12 12.2l8.6-4.6L12 3ZM3.4 12.4 12 17l8.6-4.6M3.4 16.8 12 21.4l8.6-4.6"/>
+    </symbol>
+    <symbol id="i-cursor" viewBox="0 0 24 24">
+      <path d="M5.5 3.5 18 11l-5.6 1.4L10 19 5.5 3.5Z"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M6.5 17.5 17.5 6.5M8.6 6.5h8.9v8.9"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M8 4.8 19 12 8 19.2V4.8Z"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <rect x="8.6" y="8.6" width="11" height="11" rx="2.4"/>
+      <path d="M15.4 5.6A2.4 2.4 0 0 0 13 3.4H6.8A2.4 2.4 0 0 0 4.4 5.8v6.2a2.4 2.4 0 0 0 2.2 2.4"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="M4.8 12.6 9.4 17.2 19.2 7.4"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6 6 18"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 3.2l2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.7l6.1-.9L12 3.2Z"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.6"/><path d="M12 7.2V12l3.4 2"/>
+    </symbol>
+    <symbol id="i-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="3.6"/><path d="M12 1.6v3M12 19.4v3M1.6 12h3M19.4 12h3"/>
+    </symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24">
+      <path d="M4.2 9.4h3.1L12 5.6v12.8L7.3 14.6H4.2V9.4Z"/>
+      <path d="M15.6 9.2a4 4 0 0 1 0 5.6M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/>
+    </symbol>
+    <symbol id="i-wand" viewBox="0 0 24 24">
+      <path d="M4.5 19.5 15 9M17.6 3.2l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9.9-2.4Z"/>
+    </symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24">
+      <path d="M4 7.2h9.4M17.6 7.2H20M4 16.8h3.4M11.6 16.8H20"/>
+      <circle cx="15.5" cy="7.2" r="2.1"/><circle cx="9.5" cy="16.8" r="2.1"/>
+    </symbol>
+    <symbol id="i-code" viewBox="0 0 24 24">
+      <path d="M8.5 6.8 3.4 12l5.1 5.2M15.5 6.8 20.6 12l-5.1 5.2"/>
+    </symbol>
+    <symbol id="i-database" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="5.8" rx="7.6" ry="2.8"/>
+      <path d="M4.4 5.8v12.4c0 1.6 3.4 2.9 7.6 2.9s7.6-1.3 7.6-2.9V5.8M4.4 12c0 1.6 3.4 2.9 7.6 2.9s7.6-1.3 7.6-2.9"/>
+    </symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24">
+      <rect x="2.8" y="4" width="18.4" height="12.4" rx="2.2"/><path d="M9 20.4h6M12 16.4v4"/>
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8.2" r="3.8"/><path d="M4.6 20.2a7.4 7.4 0 0 1 14.8 0"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4"/><path d="m3.6 6.6 8.4 6.2 8.4-6.2"/>
+    </symbol>
+    <symbol id="i-github" viewBox="0 0 24 24">
+      <path fill="currentColor" stroke="none" d="M12 1.8a10.2 10.2 0 0 0-3.23 19.88c.51.1.7-.22.7-.49v-1.9c-2.84.62-3.44-1.2-3.44-1.2-.46-1.18-1.13-1.5-1.13-1.5-.93-.63.07-.62.07-.62 1.02.08 1.56 1.05 1.56 1.05.91 1.56 2.39 1.11 2.97.85.09-.66.36-1.11.65-1.37-2.27-.26-4.65-1.14-4.65-5.06 0-1.12.4-2.03 1.05-2.75-.11-.26-.46-1.3.1-2.71 0 0 .86-.27 2.8 1.05a9.7 9.7 0 0 1 5.1 0c1.94-1.32 2.8-1.05 2.8-1.05.56 1.41.21 2.45.1 2.71.65.72 1.05 1.63 1.05 2.75 0 3.93-2.39 4.8-4.66 5.05.37.32.7.94.7 1.9v2.82c0 .27.18.6.7.49A10.2 10.2 0 0 0 12 1.8Z"/>
+    </symbol>
+    <symbol id="i-discord" viewBox="0 0 24 24">
+      <path fill="currentColor" stroke="none" d="M19.6 5.4A16.4 16.4 0 0 0 15.6 4l-.3.6a13 13 0 0 1 3.5 1.6 12.5 12.5 0 0 0-10.7 0A13 13 0 0 1 11.6 4.6L11.3 4a16.4 16.4 0 0 0-4 1.4C4.5 9.1 3.8 12.6 4.1 16a16.6 16.6 0 0 0 5 2.5l.6-1a11 11 0 0 1-1.7-.8l.4-.3a11.8 11.8 0 0 0 10.1 0l.4.3a11 11 0 0 1-1.7.8l.6 1a16.6 16.6 0 0 0 5-2.5c.4-3.9-.6-7.3-3.2-10.6ZM9.6 14.1c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm4.8 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top" aria-label="Jayden White — home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><defs><linearGradient id="bm" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#8b7bff"/><stop offset="1" stop-color="#38e2c8"/></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="9" fill="url(#bm)"/><path d="M12 9h3.4v9.6c0 2.6-1.6 4.2-4.2 4.2-1.6 0-2.9-.6-3.7-1.6l1.7-2c.5.6 1.1 1 1.9 1 1 0 1.5-.6 1.5-1.7V9Z" fill="#080a0f"/><path d="M19.4 9h2.9l-2.9 15h-2.9l2.9-15Z" fill="#080a0f" opacity=".55"/></svg>
+      </span>
+      <span class="brand__text">
+        <strong>Jayden White</strong>
+        <em>Roblox UI &amp; Systems</em>
+      </span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#work" class="nav__link">Work</a>
+      <a href="#lab" class="nav__link">UI Lab</a>
+      <a href="#code" class="nav__link">Code</a>
+      <a href="#process" class="nav__link">Process</a>
+      <a href="#about" class="nav__link">About</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm nav__github" href="https://github.com/jaydenwhite7714" target="_blank" rel="noopener">
+        <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg>
+        <span>GitHub</span>
+      </a>
+      <a class="btn btn--primary btn--sm" href="#contact">Hire me</a>
+      <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+        <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawer" id="navDrawer" hidden>
+    <a href="#work">Work</a>
+    <a href="#lab">UI Lab</a>
+    <a href="#code">Code</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="drawer__cta">Hire me</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" aria-label="Introduction">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__grid"></div>
+    <div class="blob blob--a"></div>
+    <div class="blob blob--b"></div>
+    <div class="blob blob--c"></div>
+    <div class="hero__noise"></div>
+  </div>
+
+  <div class="wrap hero__inner">
+    <div class="hero__copy">
+      <a class="pill reveal" href="#contact">
+        <span class="pill__dot"></span>
+        Open for commissions
+        <svg class="ico ico--xs" aria-hidden="true"><use href="#i-arrow"/></svg>
+      </a>
+
+      <h1 class="hero__title reveal" style="--d:.06s">
+        Roblox interfaces that feel
+        <span class="grad">finished.</span>
+      </h1>
+
+      <p class="hero__lede reveal" style="--d:.12s">
+        I'm Jayden — a Roblox Studio UI designer and Luau scripter. I build the HUDs,
+        shops and menus players actually enjoy touching, then wire them into real
+        combat, inventory and save systems.
+      </p>
+
+      <div class="hero__cta reveal" style="--d:.18s">
+        <a class="btn btn--primary" href="#work">
+          <span>View my work</span>
+          <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#lab">
+          <svg class="ico" aria-hidden="true"><use href="#i-play"/></svg>
+          <span>Open the UI Lab</span>
+        </a>
+      </div>
+
+      <dl class="stats reveal" style="--d:.24s">
+        <div class="stats__item">
+          <dt>UI screens</dt>
+          <dd><span class="count" data-count="48">48</span><span class="stats__plus">+</span></dd>
+        </div>
+        <div class="stats__item">
+          <dt>Systems built</dt>
+          <dd><span class="count" data-count="21">21</span><span class="stats__plus">+</span></dd>
+        </div>
+        <div class="stats__item">
+          <dt>Years in Studio</dt>
+          <dd><span class="count" data-count="4">4</span></dd>
+        </div>
+        <div class="stats__item">
+          <dt>Target FPS</dt>
+          <dd><span class="count" data-count="60">60</span><span class="stats__plus">fps</span></dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Studio window mock -->
+    <div class="hero__visual reveal" style="--d:.2s">
+      <div class="studio" id="studio" data-tilt>
+        <div class="studio__glow" aria-hidden="true"></div>
+        <div class="studio__bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="studio__file">
+            <svg class="ico ico--xs" aria-hidden="true"><use href="#i-monitor"/></svg>
+            CombatHUD.rbxl
+          </span>
+          <span class="studio__badge" aria-hidden="true">Roblox Studio</span>
+        </div>
+
+        <div class="studio__body">
+          <aside class="explorer" aria-hidden="true">
+            <div class="panel__head">Explorer</div>
+            <ul class="tree">
+              <li class="tree__row"><span class="tree__caret">▾</span><span class="tree__ico tree__ico--world"></span>Workspace</li>
+              <li class="tree__row"><span class="tree__caret">▾</span><span class="tree__ico tree__ico--world"></span>Players</li>
+              <li class="tree__row tree__row--open"><span class="tree__caret">▾</span><span class="tree__ico tree__ico--ui"></span>StarterGui</li>
+              <li class="tree__row tree__row--indent"><span class="tree__caret">▾</span><span class="tree__ico tree__ico--ui"></span>HUD</li>
+              <li class="tree__row tree__row--indent tree__row--sel"><span class="tree__caret">▾</span><span class="tree__ico tree__ico--ui"></span>Vitals
+                <span class="tree__sel-line"></span>
+              </li>
+              <li class="tree__row tree__row--indent2"><span class="tree__ico tree__ico--frame"></span>HealthBar</li>
+              <li class="tree__row tree__row--indent2"><span class="tree__ico tree__ico--frame"></span>ShieldBar</li>
+              <li class="tree__row tree__row--indent"><span class="tree__ico tree__ico--ui"></span>Hotbar</li>
+              <li class="tree__row tree__row--indent"><span class="tree__ico tree__ico--ui"></span>Objective</li>
+              <li class="tree__row tree__row--open"><span class="tree__caret">▾</span><span class="tree__ico tree__ico--script"></span>ReplicatedStorage</li>
+              <li class="tree__row tree__row--indent"><span class="tree__ico tree__ico--module"></span>CombatService</li>
+              <li class="tree__row tree__row--indent"><span class="tree__ico tree__ico--module"></span>UIBinder</li>
+            </ul>
+          </aside>
+
+          <div class="viewport" aria-hidden="true">
+            <div class="viewport__top">
+              <span class="viewport__tab is-active">Play</span>
+              <span class="viewport__tab">Design</span>
+              <span class="viewport__fps">60 fps</span>
+            </div>
+            <div class="viewport__scene">
+              <div class="scene__sky"></div>
+              <div class="scene__sun"></div>
+              <div class="scene__ridge scene__ridge--back"></div>
+              <div class="scene__ridge scene__ridge--front"></div>
+              <div class="scene__floor"></div>
+
+              <!-- mini HUD -->
+              <div class="mini">
+                <div class="mini__vitals">
+                  <div class="mini__avatar">JW</div>
+                  <div class="mini__bars">
+                    <div class="mini__name"><span>Vanguard</span><b>LV 24</b></div>
+                    <div class="mini__bar mini__bar--hp"><i></i></div>
+                    <div class="mini__bar mini__bar--sh"><i></i></div>
+                  </div>
+                </div>
+
+                <div class="mini__quest">
+                  <span class="mini__quest-dot"></span>
+                  <div>
+                    <b>Clear the Ruins</b>
+                    <em>Wave 3 of 5</em>
+                  </div>
+                </div>
+
+                <div class="mini__hotbar">
+                  <span class="mini__slot is-ready"><b>1</b><svg class="ico"><use href="#i-sword"/></svg></span>
+                  <span class="mini__slot is-ready"><b>2</b><svg class="ico"><use href="#i-shield"/></svg></span>
+                  <span class="mini__slot is-cool" style="--p:64%"><b>3</b><svg class="ico"><use href="#i-flame"/></svg><i class="mini__cool"></i></span>
+                  <span class="mini__slot is-ready"><b>4</b><svg class="ico"><use href="#i-bolt"/></svg></span>
+                </div>
+
+                <div class="mini__dmg">248</div>
+                <div class="mini__combo">x7 <span>COMBO</span></div>
+              </div>
+
+              <div class="sel-box" aria-hidden="true">
+                <span class="sel-box__tag">UIGridLayout</span>
+                <i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+
+          <aside class="props" aria-hidden="true">
+            <div class="panel__head">Properties</div>
+            <div class="props__group">Vitals <span>Frame</span></div>
+            <div class="props__row"><span>Size</span><b>0, 0, 320, 84</b></div>
+            <div class="props__row"><span>Position</span><b>0, 0, 28, 28</b></div>
+            <div class="props__row"><span>AnchorPoint</span><b>0, 0</b></div>
+            <div class="props__row"><span>Background</span><b class="prop-swatch"></b></div>
+            <div class="props__row"><span>Transparency</span><b>0.08</b></div>
+            <div class="props__row"><span>ZIndex</span><b>12</b></div>
+            <div class="props__group">UICorner <span>Modifier</span></div>
+            <div class="props__row"><span>CornerRadius</span><b>0, 14</b></div>
+            <div class="props__group">UIGradient <span>Modifier</span></div>
+            <div class="props__row"><span>Rotation</span><b>18°</b></div>
+          </aside>
+        </div>
+
+        <div class="studio__console">
+          <div class="console__tabs" aria-hidden="true"><span class="is-active">Output</span><span>Script</span></div>
+          <div class="console__log" id="consoleLog" aria-hidden="true">
+            <p class="log log--ok"><span>12:04:16</span> UIBinder: 7 frames bound</p>
+            <p class="log log--ok"><span>12:04:17</span> CombatService ready · 8 abilities</p>
+            <p class="log log--info"><span>12:04:19</span> HUD Vitals · TweenService 0.22s</p>
+            <p class="log log--warn"><span>12:04:22</span> Cooldown sync · reconciling 1 slot</p>
+            <p class="log log--ok"><span>12:04:23</span> All systems nominal ✓</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating floating--fps" aria-hidden="true">
+        <svg class="ico"><use href="#i-chart"/></svg>
+        <div><b>60 fps</b><span>on mobile</span></div>
+      </div>
+      <div class="floating floating--clean" aria-hidden="true">
+        <svg class="ico"><use href="#i-sparkle"/></svg>
+        <div><b>100% hand-built</b><span>zero free models</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"><span></span>scroll</div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>UI / UX Design</span><i></i>
+    <span>Luau</span><i></i>
+    <span>Combat Systems</span><i></i>
+    <span>Inventory</span><i></i>
+    <span>DataStore</span><i></i>
+    <span>TweenService</span><i></i>
+    <span>Client–Server</span><i></i>
+    <span>Shops</span><i></i>
+    <span>Optimisation</span><i></i>
+    <span>Game Feel</span><i></i>
+    <span>UI / UX Design</span><i></i>
+    <span>Luau</span><i></i>
+    <span>Combat Systems</span><i></i>
+    <span>Inventory</span><i></i>
+    <span>DataStore</span><i></i>
+    <span>TweenService</span><i></i>
+    <span>Client–Server</span><i></i>
+    <span>Shops</span><i></i>
+    <span>Optimisation</span><i></i>
+    <span>Game Feel</span><i></i>
+  </div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services" aria-label="What I do">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <span class="eyebrow"><i></i>What I do</span>
+        <h2 class="sec-title">Two jobs, one person.<br /><span class="muted">Design and script, together.</span></h2>
+      </div>
+      <p class="sec-sub reveal" style="--d:.08s">
+        Most teams hire a designer who can't code and a coder who can't design.
+        I do both, so the interface you see in the mockup is the interface that ships —
+        with the logic already wired behind it.
+      </p>
+    </div>
+
+    <div class="cards">
+      <article class="svc reveal" style="--d:.02s">
+        <div class="svc__icon"><svg class="ico"><use href="#i-layers"/></svg></div>
+        <h3>Game UI &amp; UX</h3>
+        <p>HUDs, shops, inventories, quest logs and menus that stay readable at any resolution.</p>
+        <ul class="svc__list">
+          <li>Scale-based layouts for every device</li>
+          <li>Tweened transitions and hover states</li>
+          <li>Consistent spacing, radius and colour tokens</li>
+        </ul>
+        <span class="svc__glow" aria-hidden="true"></span>
+      </article>
+
+      <article class="svc reveal" style="--d:.08s">
+        <div class="svc__icon"><svg class="ico"><use href="#i-sword"/></svg></div>
+        <h3>Combat &amp; Abilities</h3>
+        <p>Melee combos, projectiles, cooldowns and hit validation that can't be faked on the client.</p>
+        <ul class="svc__list">
+          <li>Server-authoritative damage and hitboxes</li>
+          <li>Ability cooldowns with client prediction</li>
+          <li>Hit feedback: shake, flashes, sound, particles</li>
+        </ul>
+        <span class="svc__glow" aria-hidden="true"></span>
+      </article>
+
+      <article class="svc reveal" style="--d:.14s">
+        <div class="svc__icon"><svg class="ico"><use href="#i-database"/></svg></div>
+        <h3>Data &amp; Progression</h3>
+        <p>Save systems that survive a server crash, plus the XP curves and quest chains on top.</p>
+        <ul class="svc__list">
+          <li>DataStore with retries and session locking</li>
+          <li>Levels, currencies, inventories, unlocks</li>
+          <li>Schema migrations when the game grows</li>
+        </ul>
+        <span class="svc__glow" aria-hidden="true"></span>
+      </article>
+
+      <article class="svc reveal" style="--d:.2s">
+        <div class="svc__icon"><svg class="ico"><use href="#i-sliders"/></svg></div>
+        <h3>Polish &amp; Tooling</h3>
+        <p>The last 10% that makes a game feel expensive — plus the admin tools to keep it running.</p>
+        <ul class="svc__list">
+          <li>Micro-animations and UI sound design</li>
+          <li>Loading screens, notifications, toasts</li>
+          <li>In-game admin panel and debug console</li>
+        </ul>
+        <span class="svc__glow" aria-hidden="true"></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="section section--alt" id="work" aria-label="Selected work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <span class="eyebrow"><i></i>Selected work</span>
+        <h2 class="sec-title">Systems I've built.<br /><span class="muted">Six of them, up close.</span></h2>
+      </div>
+      <p class="sec-sub reveal" style="--d:.08s">
+        Six projects that show the range: interface-first builds, gameplay systems,
+        and the boring-but-critical backend that keeps a game alive. Tap any card
+        for the breakdown.
+      </p>
+    </div>
+
+    <div class="projects">
+
+      <article class="proj reveal" data-project="combat" tabindex="0" role="button" aria-haspopup="dialog" style="--accent:#8b7bff;--d:.02s">
+        <div class="proj__preview pv-combat" aria-hidden="true">
+          <div class="pv-combat__hud">
+            <span class="pv-combat__bar"><i style="width:76%"></i></span>
+            <span class="pv-combat__bar pv-combat__bar--sh"><i style="width:40%"></i></span>
+          </div>
+          <div class="pv-combat__slots">
+            <span class="is-on"><svg class="ico"><use href="#i-sword"/></svg></span>
+            <span><svg class="ico"><use href="#i-shield"/></svg></span>
+            <span class="is-cool"><svg class="ico"><use href="#i-flame"/></svg></span>
+            <span><svg class="ico"><use href="#i-bolt"/></svg></span>
+          </div>
+          <span class="pv-combat__combo">x7</span>
+          <span class="pv-combat__hit">CRIT 248</span>
+        </div>
+        <div class="proj__body">
+          <div class="proj__top">
+            <span class="chip">Gameplay · UI</span>
+            <span class="proj__arrow"><svg class="ico"><use href="#i-arrow"/></svg></span>
+          </div>
+          <h3>Vanguard Combat</h3>
+          <p>Ability-based melee combat with combos, i-frames and a HUD that reads at a glance. Server validates every hit; the client only predicts.</p>
+          <div class="tags"><span>Luau</span><span>RemoteEvents</span><span>HUD</span></div>
+          <div class="proj__foot"><b>8 abilities</b><span>·</span><b>0 exploitable hits</b></div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-project="shop" tabindex="0" role="button" aria-haspopup="dialog" style="--accent:#38e2c8;--d:.07s">
+        <div class="proj__preview pv-shop" aria-hidden="true">
+          <div class="pv-shop__head"><span></span><span></span><span></span></div>
+          <div class="pv-shop__grid">
+            <div class="pv-shop__item pv-shop__item--legendary"><i></i><span></span></div>
+            <div class="pv-shop__item pv-shop__item--rare"><i></i><span></span></div>
+            <div class="pv-shop__item"><i></i><span></span></div>
+            <div class="pv-shop__item pv-shop__item--epic"><i></i><span></span></div>
+            <div class="pv-shop__item"><i></i><span></span></div>
+            <div class="pv-shop__item pv-shop__item--rare"><i></i><span></span></div>
+          </div>
+          <div class="pv-shop__buy">BUY · 1,250</div>
+        </div>
+        <div class="proj__body">
+          <div class="proj__top">
+            <span class="chip">UI · Commerce</span>
+            <span class="proj__arrow"><svg class="ico"><use href="#i-arrow"/></svg></span>
+          </div>
+          <h3>Aether Shop</h3>
+          <p>A storefront with rarity tiers, live tooltips, a purchase confirm flow and celebratory buy feedback that never blocks the frame.</p>
+          <div class="tags"><span>TweenService</span><span>UI</span><span>Economy</span></div>
+          <div class="proj__foot"><b>26 items</b><span>·</span><b>1 frame purchase</b></div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-project="inventory" tabindex="0" role="button" aria-haspopup="dialog" style="--accent:#ffb457;--d:.12s">
+        <div class="proj__preview pv-inv" aria-hidden="true">
+          <div class="pv-inv__grid">
+            <span class="r2"></span><span></span><span class="r3"></span><span class="r1"></span>
+            <span></span><span class="r4"></span><span></span><span class="r2 is-sel"></span>
+            <span class="r1"></span><span></span><span class="r2"></span><span></span>
+          </div>
+          <div class="pv-inv__tooltip">
+            <b>Ember Blade</b><em>Legendary · 2.4k</em>
+          </div>
+        </div>
+        <div class="proj__body">
+          <div class="proj__top">
+            <span class="chip">UI · Systems</span>
+            <span class="proj__arrow"><svg class="ico"><use href="#i-arrow"/></svg></span>
+          </div>
+          <h3>Grid Inventory</h3>
+          <p>Drag-and-drop grid inventory with stackable items, equipment slots, rarity glow and full gamepad support.</p>
+          <div class="tags"><span>Drag &amp; Drop</span><span>UI</span><span>Gamepad</span></div>
+          <div class="proj__foot"><b>48 slots</b><span>·</span><b>mobile + pad</b></div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-project="save" tabindex="0" role="button" aria-haspopup="dialog" style="--accent:#5ec8ff;--d:.02s">
+        <div class="proj__preview pv-save" aria-hidden="true">
+          <div class="pv-save__rows">
+            <span><i style="width:100%"></i></span>
+            <span><i style="width:92%"></i></span>
+            <span><i style="width:97%"></i></span>
+            <span><i style="width:64%"></i></span>
+          </div>
+          <div class="pv-save__badge"><svg class="ico"><use href="#i-check"/></svg> Saved</div>
+          <div class="pv-save__meta">autosave · 30s<br />retries · 3</div>
+        </div>
+        <div class="proj__body">
+          <div class="proj__top">
+            <span class="chip">Backend</span>
+            <span class="proj__arrow"><svg class="ico"><use href="#i-arrow"/></svg></span>
+          </div>
+          <h3>SaveCore</h3>
+          <p>A DataStore module with session locking, retry queues, autosave and schema migrations — so a dropped server never eats progress.</p>
+          <div class="tags"><span>DataStore</span><span>Modules</span><span>Backend</span></div>
+          <div class="proj__foot"><b>0 rollbacks</b><span>·</span><b>2M+ sessions</b></div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-project="boss" tabindex="0" role="button" aria-haspopup="dialog" style="--accent:#ff6b9d;--d:.07s">
+        <div class="proj__preview pv-boss" aria-hidden="true">
+          <div class="pv-boss__bar"><i style="width:62%"></i><em>Phase II</em></div>
+          <div class="pv-boss__ring"></div>
+          <div class="pv-boss__waves"><i></i><i></i><i></i></div>
+          <span class="pv-boss__warn">TELEGRAPH</span>
+        </div>
+        <div class="proj__body">
+          <div class="proj__top">
+            <span class="chip">Gameplay</span>
+            <span class="proj__arrow"><svg class="ico"><use href="#i-arrow"/></svg></span>
+          </div>
+          <h3>Boss Rush</h3>
+          <p>Wave-based encounters with telegraphed attacks, phase transitions, loot rolls and a boss bar that scales with damage dealt.</p>
+          <div class="tags"><span>AI</span><span>Combat</span><span>Loot</span></div>
+          <div class="proj__foot"><b>5 bosses</b><span>·</span><b>3 phases each</b></div>
+        </div>
+      </article>
+
+      <article class="proj reveal" data-project="toolkit" tabindex="0" role="button" aria-haspopup="dialog" style="--accent:#a6e85f;--d:.12s">
+        <div class="proj__preview pv-tool" aria-hidden="true">
+          <div class="pv-tool__win">
+            <div class="pv-tool__tabs"><span class="is-active"></span><span></span><span></span></div>
+            <div class="pv-tool__line"><b>&gt;</b> kick <em>player_12</em></div>
+            <div class="pv-tool__line"><b>&gt;</b> stats</div>
+            <div class="pv-tool__line pv-tool__line--ok">server · 60fps · 41 players</div>
+            <div class="pv-tool__line pv-tool__line--dim"><b>&gt;</b> <i class="caret"></i></div>
+          </div>
+          <div class="pv-tool__meter"><i style="width:38%"></i></div>
+        </div>
+        <div class="proj__body">
+          <div class="proj__top">
+            <span class="chip">Tooling</span>
+            <span class="proj__arrow"><svg class="ico"><use href="#i-arrow"/></svg></span>
+          </div>
+          <h3>Studio Toolkit</h3>
+          <p>An in-game admin and debugging panel: live server stats, player inspector, command console and one-click test tools for the team.</p>
+          <div class="tags"><span>Admin</span><span>UI</span><span>Debug</span></div>
+          <div class="proj__foot"><b>20+ commands</b><span>·</span><b>role-gated</b></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ UI LAB ============ -->
+<section class="section" id="lab" aria-label="UI Lab">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <span class="eyebrow"><i></i>UI Lab</span>
+        <h2 class="sec-title">Interfaces, up close.<br /><span class="muted">Every pixel hand-placed.</span></h2>
+      </div>
+      <p class="sec-sub reveal" style="--d:.08s">
+        Live recreations of screens I've designed in Roblox Studio — rebuilt here in
+        plain HTML and CSS so you can look at them without opening the game. Switch
+        between screens below.
+      </p>
+    </div>
+
+    <div class="lab reveal">
+      <div class="lab__bar">
+        <div class="lab__tabs" role="tablist" aria-label="UI screens">
+          <button class="lab__tab is-active" role="tab" id="tab-hud" aria-controls="panel-hud" aria-selected="true" data-tab="hud">
+            <svg class="ico ico--xs"><use href="#i-shield"/></svg> Combat HUD
+          </button>
+          <button class="lab__tab" role="tab" id="tab-shop" aria-controls="panel-shop" aria-selected="false" tabindex="-1" data-tab="shop">
+            <svg class="ico ico--xs"><use href="#i-coin"/></svg> Shop
+          </button>
+          <button class="lab__tab" role="tab" id="tab-inv" aria-controls="panel-inv" aria-selected="false" tabindex="-1" data-tab="inv">
+            <svg class="ico ico--xs"><use href="#i-bag"/></svg> Inventory
+          </button>
+          <button class="lab__tab" role="tab" id="tab-quest" aria-controls="panel-quest" aria-selected="false" tabindex="-1" data-tab="quest">
+            <svg class="ico ico--xs"><use href="#i-star"/></svg> Quests
+          </button>
+          <button class="lab__tab" role="tab" id="tab-settings" aria-controls="panel-settings" aria-selected="false" tabindex="-1" data-tab="settings">
+            <svg class="ico ico--xs"><use href="#i-sliders"/></svg> Settings
+          </button>
+        </div>
+        <span class="lab__hint"><i></i>Interactive preview</span>
+      </div>
+
+      <div class="lab__stage">
+        <div class="screen">
+          <div class="screen__scene" aria-hidden="true">
+            <div class="sc-sky"></div>
+            <div class="sc-sun"></div>
+            <div class="sc-cloud sc-cloud--a"></div>
+            <div class="sc-cloud sc-cloud--b"></div>
+            <div class="sc-ridge sc-ridge--far"></div>
+            <div class="sc-ridge sc-ridge--mid"></div>
+            <div class="sc-ridge sc-ridge--near"></div>
+            <div class="sc-floor"></div>
+            <div class="sc-vignette"></div>
+            <div class="sc-crosshair"></div>
+          </div>
+
+          <!-- ===== HUD ===== -->
+          <div class="lab__panel is-active" id="panel-hud" role="tabpanel" aria-labelledby="tab-hud">
+            <div class="hud">
+              <div class="hud__vitals">
+                <div class="hud__avatar">JW<span>24</span></div>
+                <div class="hud__vitals-body">
+                  <div class="hud__vitals-top"><b>Vanguard</b><em>LV 24</em></div>
+                  <div class="ube bar-hp"><i style="width:78%"></i><span>780 / 1000</span></div>
+                  <div class="ube bar-sh"><i style="width:42%"></i><span>340 / 800</span></div>
+                </div>
+              </div>
+
+              <div class="hud__quest">
+                <span class="hud__quest-ico"><svg class="ico"><use href="#i-target"/></svg></span>
+                <div><b>Clear the Sunken Ruins</b><small>Wave 3 of 5 · 12 enemies left</small></div>
+              </div>
+
+              <div class="hud__boss">
+                <div class="hud__boss-top"><b>Ruins Warden</b><em>Phase II</em></div>
+                <div class="hud__boss-bar"><i style="width:64%"></i><span></span></div>
+              </div>
+
+              <div class="hud__combo"><b>x7</b><span>COMBO</span></div>
+              <div class="hud__dmg">248</div>
+              <div class="hud__dmg hud__dmg--crit">CRIT</div>
+
+              <div class="hud__hotbar">
+                <div class="slot is-active">
+                  <b class="slot__key">1</b>
+                  <svg class="ico"><use href="#i-sword"/></svg>
+                  <span class="slot__name">Slash</span>
+                  <i class="slot__cd"></i>
+                </div>
+                <div class="slot">
+                  <b class="slot__key">2</b>
+                  <svg class="ico"><use href="#i-shield"/></svg>
+                  <span class="slot__name">Guard</span>
+                  <i class="slot__cd"></i>
+                </div>
+                <div class="slot is-cooling" style="--cd:62%">
+                  <b class="slot__key">3</b>
+                  <svg class="ico"><use href="#i-flame"/></svg>
+                  <span class="slot__name">Ember</span>
+                  <i class="slot__cd"></i>
+                  <b class="slot__timer">4.2</b>
+                </div>
+                <div class="slot">
+                  <b class="slot__key">4</b>
+                  <svg class="ico"><use href="#i-bolt"/></svg>
+                  <span class="slot__name">Dash</span>
+                  <i class="slot__cd"></i>
+                </div>
+                <div class="slot slot--empty"><b class="slot__key">5</b></div>
+              </div>
+
+              <div class="hud__currency">
+                <span><svg class="ico ico--xs"><use href="#i-coin"/></svg> 12,480</span>
+                <span><svg class="ico ico--xs"><use href="#i-sparkle"/></svg> 320</span>
+              </div>
+
+              <div class="hud__minimap">
+                <div class="hud__minimap-map"><i class="mm mm--self"></i><i class="mm mm--ally"></i><i class="mm mm--foe"></i><i class="mm mm--foe2"></i></div>
+                <span>Ruins · 3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== SHOP ===== -->
+          <div class="lab__panel" id="panel-shop" role="tabpanel" aria-labelledby="tab-shop" hidden>
+            <div class="shopui">
+              <header class="shopui__head">
+                <div>
+                  <span class="shopui__eyebrow">Aether Exchange</span>
+                  <h3>Weapon Shop</h3>
+                </div>
+                <div class="shopui__wallet">
+                  <span><svg class="ico ico--xs"><use href="#i-coin"/></svg> 12,480</span>
+                  <button class="shopui__x" aria-label="Close shop"><svg class="ico ico--xs"><use href="#i-close"/></svg></button>
+                </div>
+              </header>
+
+              <div class="shopui__filters">
+                <button class="is-active">All</button>
+                <button>Weapons</button>
+                <button>Boosts</button>
+                <button>Cosmetics</button>
+              </div>
+
+              <div class="shopui__grid">
+                <article class="item item--legendary">
+                  <span class="item__rarity">Legendary</span>
+                  <div class="item__art"><svg class="ico"><use href="#i-flame"/></svg></div>
+                  <div class="item__info"><b>Ember Blade</b><small>+32 ATK</small></div>
+                  <button class="item__buy"><svg class="ico ico--xs"><use href="#i-coin"/></svg> 1,250</button>
+                </article>
+                <article class="item item--epic">
+                  <span class="item__rarity">Epic</span>
+                  <div class="item__art"><svg class="ico"><use href="#i-shield"/></svg></div>
+                  <div class="item__info"><b>Aegis Plate</b><small>+28 DEF</small></div>
+                  <button class="item__buy"><svg class="ico ico--xs"><use href="#i-coin"/></svg> 980</button>
+                </article>
+                <article class="item item--rare">
+                  <span class="item__rarity">Rare</span>
+                  <div class="item__art"><svg class="ico"><use href="#i-bolt"/></svg></div>
+                  <div class="item__info"><b>Stormstep</b><small>+14 SPD</small></div>
+                  <button class="item__buy"><svg class="ico ico--xs"><use href="#i-coin"/></svg> 640</button>
+                </article>
+                <article class="item">
+                  <span class="item__rarity">Common</span>
+                  <div class="item__art"><svg class="ico"><use href="#i-bag"/></svg></div>
+                  <div class="item__info"><b>Field Kit</b><small>+5 slots</small></div>
+                  <button class="item__buy"><svg class="ico ico--xs"><use href="#i-coin"/></svg> 220</button>
+                </article>
+                <article class="item item--epic">
+                  <span class="item__rarity">Epic</span>
+                  <div class="item__art"><svg class="ico"><use href="#i-sparkle"/></svg></div>
+                  <div class="item__info"><b>Lumen Dust</b><small>x3 · 30 min</small></div>
+                  <button class="item__buy"><svg class="ico ico--xs"><use href="#i-coin"/></svg> 410</button>
+                </article>
+                <article class="item item--rare">
+                  <span class="item__rarity">Rare</span>
+                  <div class="item__art"><svg class="ico"><use href="#i-target"/></svg></div>
+                  <div class="item__info"><b>Hunter's Mark</b><small>+9% crit</small></div>
+                  <button class="item__buy"><svg class="ico ico--xs"><use href="#i-coin"/></svg> 520</button>
+                </article>
+              </div>
+
+              <footer class="shopui__foot">
+                <span><i class="dot-live"></i> Prices refresh every hour</span>
+                <span class="shopui__kbd"><kbd>F</kbd> buy &nbsp;<kbd>Esc</kbd> close</span>
+              </footer>
+            </div>
+          </div>
+
+          <!-- ===== INVENTORY ===== -->
+          <div class="lab__panel" id="panel-inv" role="tabpanel" aria-labelledby="tab-inv" hidden>
+            <div class="invui">
+              <header class="invui__head">
+                <div>
+                  <span class="invui__eyebrow">Vanguard · LV 24</span>
+                  <h3>Inventory</h3>
+                </div>
+                <div class="invui__cap">32 / 48 <span>slots</span></div>
+              </header>
+
+              <div class="invui__body">
+                <div class="invui__grid">
+                  <span class="cell cell--legendary"><svg class="ico"><use href="#i-flame"/></svg><b>x1</b></span>
+                  <span class="cell cell--epic"><svg class="ico"><use href="#i-shield"/></svg><b>x1</b></span>
+                  <span class="cell"><svg class="ico"><use href="#i-bag"/></svg><b>x4</b></span>
+                  <span class="cell cell--rare"><svg class="ico"><use href="#i-bolt"/></svg><b>x2</b></span>
+                  <span class="cell"><svg class="ico"><use href="#i-coin"/></svg><b>x88</b></span>
+                  <span class="cell cell--rare is-selected"><svg class="ico"><use href="#i-sword"/></svg><b>x1</b></span>
+                  <span class="cell"></span>
+                  <span class="cell cell--epic"><svg class="ico"><use href="#i-sparkle"/></svg><b>x3</b></span>
+                  <span class="cell"></span>
+                  <span class="cell"><svg class="ico"><use href="#i-target"/></svg><b>x1</b></span>
+                  <span class="cell"></span>
+                  <span class="cell"></span>
+                  <span class="cell cell--legendary"><svg class="ico"><use href="#i-star"/></svg><b>x1</b></span>
+                  <span class="cell"></span>
+                  <span class="cell cell--rare"><svg class="ico"><use href="#i-clock"/></svg><b>x6</b></span>
+                  <span class="cell"></span>
+                  <span class="cell cell--epic"><svg class="ico"><use href="#i-gear"/></svg><b>x2</b></span>
+                  <span class="cell"></span>
+                </div>
+
+                <aside class="invui__detail">
+                  <div class="invui__art"><svg class="ico"><use href="#i-sword"/></svg></div>
+                  <span class="invui__rarity">Rare · Weapon</span>
+                  <h4>Stormstep Blade</h4>
+                  <p>Forged in the ruins. Chains a lightning arc on every third hit.</p>
+                  <ul class="invui__stats">
+                    <li><span>Damage</span><b>42</b></li>
+                    <li><span>Speed</span><b>1.4x</b></li>
+                    <li><span>Crit</span><b>+9%</b></li>
+                  </ul>
+                  <div class="invui__actions">
+                    <button class="invui__btn invui__btn--primary">Equip</button>
+                    <button class="invui__btn"><svg class="ico ico--xs"><use href="#i-bag"/></svg></button>
+                  </div>
+                </aside>
+              </div>
+
+              <footer class="invui__foot">
+                <span class="chip-mini">Drag to move</span>
+                <span class="chip-mini">Double-click to equip</span>
+                <span class="chip-mini">Sort by rarity</span>
+              </footer>
+            </div>
+          </div>
+
+          <!-- ===== QUESTS ===== -->
+          <div class="lab__panel" id="panel-quest" role="tabpanel" aria-labelledby="tab-quest" hidden>
+            <div class="questui">
+              <header class="questui__head">
+                <div>
+                  <span class="questui__eyebrow">Journal</span>
+                  <h3>Quest Log</h3>
+                </div>
+                <span class="questui__timer"><svg class="ico ico--xs"><use href="#i-clock"/></svg> resets in 4h 12m</span>
+              </header>
+
+              <div class="questui__list">
+                <article class="quest is-open">
+                  <div class="quest__head">
+                    <span class="quest__badge">Main</span>
+                    <div><b>Into the Sunken Ruins</b><small>Chapter 3 · The Warden</small></div>
+                    <svg class="ico ico--xs quest__chev"><use href="#i-arrow"/></svg>
+                  </div>
+                  <div class="quest__steps">
+                    <div class="qstep is-done"><i></i><span>Reach the ruin entrance</span><b>1/1</b></div>
+                    <div class="qstep"><i></i><span>Defeat 12 Warden Sentries</span><b>7/12</b></div>
+                    <div class="qstep"><i></i><span>Survive the wave event</span><b>0/1</b></div>
+                  </div>
+                  <div class="quest__rewards">
+                    <span>Rewards</span>
+                    <b><svg class="ico ico--xs"><use href="#i-coin"/></svg> 2,500</b>
+                    <b><svg class="ico ico--xs"><use href="#i-sparkle"/></svg> 450</b>
+                    <b><svg class="ico ico--xs"><use href="#i-star"/></svg> 1</b>
+                  </div>
+                </article>
+
+                <article class="quest">
+                  <div class="quest__head">
+                    <span class="quest__badge quest__badge--side">Side</span>
+                    <div><b>Gatherer's Errand</b><small>Collect Moonbloom</small></div>
+                    <b class="quest__prog">3/8</b>
+                  </div>
+                  <div class="quest__bar"><i style="width:37%"></i></div>
+                </article>
+
+                <article class="quest">
+                  <div class="quest__head">
+                    <span class="quest__badge quest__badge--daily">Daily</span>
+                    <div><b>Duel Discipline</b><small>Win 3 duels</small></div>
+                    <b class="quest__prog">1/3</b>
+                  </div>
+                  <div class="quest__bar"><i style="width:33%"></i></div>
+                </article>
+              </div>
+
+              <footer class="questui__foot">
+                <span><i class="qdot"></i> 3 active</span>
+                <span><i class="qdot qdot--done"></i> 12 completed</span>
+                <span class="questui__track">Track</span>
+              </footer>
+            </div>
+          </div>
+
+          <!-- ===== SETTINGS ===== -->
+          <div class="lab__panel" id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+            <div class="setui">
+              <header class="setui__head">
+                <div><span class="setui__eyebrow">Preferences</span><h3>Settings</h3></div>
+                <button class="shopui__x" aria-label="Close settings"><svg class="ico ico--xs"><use href="#i-close"/></svg></button>
+              </header>
+
+              <nav class="setui__nav" aria-hidden="true">
+                <span class="is-active"><svg class="ico ico--xs"><use href="#i-sliders"/></svg> General</span>
+                <span><svg class="ico ico--xs"><use href="#i-volume"/></svg> Audio</span>
+                <span><svg class="ico ico--xs"><use href="#i-chart"/></svg> Graphics</span>
+                <span><svg class="ico ico--xs"><use href="#i-code"/></svg> Controls</span>
+              </nav>
+
+              <div class="setui__body">
+                <div class="setui__group">
+                  <span class="setui__label">Audio</span>
+                  <div class="setrow">
+                    <div><b>Master volume</b><small>All game audio</small></div>
+                    <div class="slider"><i style="width:72%"></i><em style="left:72%"></em></div>
+                  </div>
+                  <div class="setrow">
+                    <div><b>Music</b><small>Ambient &amp; combat</small></div>
+                    <div class="slider"><i style="width:45%"></i><em style="left:45%"></em></div>
+                  </div>
+                </div>
+
+                <div class="setui__group">
+                  <span class="setui__label">Game feel</span>
+                  <div class="setrow">
+                    <div><b>Screen shake</b><small>Impact on heavy hits</small></div>
+                    <span class="toggle is-on"><i></i></span>
+                  </div>
+                  <div class="setrow">
+                    <div><b>Damage numbers</b><small>Floating combat text</small></div>
+                    <span class="toggle is-on"><i></i></span>
+                  </div>
+                  <div class="setrow">
+                    <div><b>Reduced motion</b><small>Fewer tweens and pulses</small></div>
+                    <span class="toggle"><i></i></span>
+                  </div>
+                </div>
+
+                <div class="setui__group">
+                  <span class="setui__label">Graphics</span>
+                  <div class="setrow">
+                    <div><b>Quality</b><small>Shadows, particles, bloom</small></div>
+                    <div class="segmented"><button>Low</button><button class="is-active">High</button><button>Ultra</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="setui__foot">
+                <span class="setui__saved"><svg class="ico ico--xs"><use href="#i-check"/></svg> Saved automatically</span>
+                <button class="invui__btn invui__btn--primary">Done</button>
+              </footer>
+            </div>
+          </div>
+
+          <div class="screen__hud-corner" aria-hidden="true">
+            <span class="screen__ping"><i></i> 24 ms</span>
+            <span class="screen__server">US-East · 41 players</span>
+          </div>
+        </div>
+
+        <aside class="lab__caption" aria-live="polite">
+          <div class="lab__caption-head">
+            <span class="lab__caption-dot"></span>
+            <b id="labName">Combat HUD</b>
+            <span id="labTag">In-game overlay</span>
+          </div>
+          <p id="labDesc">Health and shield arcs, a cooldown-aware ability bar, combo counter and a boss bar — all laid out on a scale grid so nothing clips on phones.</p>
+          <dl class="lab__spec" id="labSpec">
+            <div><dt>Screen</dt><dd>Overlay · always on</dd></div>
+            <div><dt>Sizing</dt><dd>Scale + UIAspectRatio</dd></div>
+            <div><dt>Motion</dt><dd>0.22s · Quad out</dd></div>
+          </dl>
+          <div class="lab__caption-foot">
+            <div class="tags" id="labTags"><span>UIStroke</span><span>UICorner</span><span>TweenService</span></div>
+            <button class="lab__prev" id="labPrev" aria-label="Previous screen"><svg class="ico"><use href="#i-arrow"/></svg></button>
+            <button class="lab__next" id="labNext" aria-label="Next screen"><svg class="ico"><use href="#i-arrow"/></svg></button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CODE ============ -->
+<section class="section section--alt" id="code" aria-label="Code samples">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <span class="eyebrow"><i></i>Under the hood</span>
+        <h2 class="sec-title">The part players never see.<br /><span class="muted">It still has to be clean.</span></h2>
+      </div>
+      <p class="sec-sub reveal" style="--d:.08s">
+        Pretty frames are half the job. These are real patterns I use: server-side hit
+        validation, UI that binds to state instead of guessing, and saves that don't
+        lose data when Roblox has a bad day.
+      </p>
+    </div>
+
+    <div class="code-wrap reveal">
+      <div class="code-main">
+        <div class="code-win">
+          <div class="code-win__bar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <div class="code-tabs" role="tablist" aria-label="Code samples">
+              <button class="code-tab is-active" role="tab" id="ct-combat" aria-controls="cp-combat" aria-selected="true" data-code="combat">CombatService.lua</button>
+              <button class="code-tab" role="tab" id="ct-inv" aria-controls="cp-inv" aria-selected="false" tabindex="-1" data-code="inv">InventoryClient.lua</button>
+              <button class="code-tab" role="tab" id="ct-save" aria-controls="cp-save" aria-selected="false" tabindex="-1" data-code="save">SaveService.lua</button>
+            </div>
+            <button class="code-copy" id="copyBtn" aria-label="Copy code">
+              <svg class="ico ico--xs"><use href="#i-copy"/></svg><span>Copy</span>
+            </button>
+          </div>
+
+          <div class="code-body">
+<pre class="code-panel is-active" id="cp-combat" role="tabpanel" aria-labelledby="ct-combat"><code><span class="ln">1</span><span class="k">local</span> CombatService = {}
+<span class="ln">2</span><span class="k">local</span> Players = game:<span class="f">GetService</span>(<span class="s">"Players"</span>)
+<span class="ln">3</span><span class="k">local</span> Remotes = ReplicatedStorage.Remotes
+<span class="ln">4</span>
+<span class="ln">5</span><span class="k">local</span> COOLDOWN   = <span class="n">0.65</span>
+<span class="ln">6</span><span class="k">local</span> MAX_REACH  = <span class="n">9</span>
+<span class="ln">7</span><span class="k">local</span> lastSwing  = {}
+<span class="ln">8</span>
+<span class="ln">9</span><span class="k">function</span> <span class="f">CombatService.hit</span>(player, target, abilityId)
+<span class="ln">10</span>    <span class="c">-- server owns the truth: validate everything</span>
+<span class="ln">11</span>    <span class="k">if</span> <span class="k">not</span> target <span class="k">or</span> <span class="k">not</span> target.Parent <span class="k">then</span> <span class="k">return</span> <span class="k">end</span>
+<span class="ln">12</span>    <span class="k">if</span> <span class="f">os.clock</span>() - (lastSwing[player] <span class="k">or</span> <span class="n">0</span>) &lt; COOLDOWN <span class="k">then</span>
+<span class="ln">13</span>        <span class="k">return</span> <span class="f">warn</span>(<span class="s">"rate-limited"</span>)
+<span class="ln">14</span>    <span class="k">end</span>
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="k">local</span> dist = (player.Character.HumanoidRootPart.Position
+<span class="ln">17</span>        - target.HumanoidRootPart.Position).Magnitude
+<span class="ln">18</span>    <span class="k">if</span> dist &gt; MAX_REACH + <span class="n">2</span> <span class="k">then</span> <span class="k">return</span> <span class="k">end</span> <span class="c">-- too far</span>
+<span class="ln">19</span>
+<span class="ln">20</span>    lastSwing[player] = <span class="f">os.clock</span>()
+<span class="ln">21</span>    <span class="k">local</span> dmg = <span class="f">calculateDamage</span>(player, abilityId, <span class="k">false</span>)
+<span class="ln">22</span>    <span class="f">applyDamage</span>(target, dmg)
+<span class="ln">23</span>    Remotes.HitFeedback:<span class="f">FireAllClients</span>(target, dmg, abilityId)
+<span class="ln">24</span><span class="k">end</span>
+
+<span class="ln">25</span>Remotes.RequestHit.OnServerEvent:<span class="f">Connect</span>(CombatService.hit)
+<span class="ln">26</span><span class="k">return</span> CombatService</code></pre>
+
+<pre class="code-panel" id="cp-inv" role="tabpanel" aria-labelledby="ct-inv" hidden><code><span class="ln">1</span><span class="k">local</span> UIBinder = {}
+<span class="ln">2</span><span class="k">local</span> Inventory = <span class="f">require</span>(ReplicatedStorage.Inventory)
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c">-- one source of truth, one render pass</span>
+<span class="ln">5</span><span class="k">function</span> <span class="f">UIBinder.bind</span>(state, render)
+<span class="ln">6</span>    <span class="k">local</span> conns = {}
+<span class="ln">7</span>    <span class="k">for</span> _, key <span class="k">in</span> <span class="f">pairs</span>(state) <span class="k">do</span>
+<span class="ln">8</span>        conns[key] = <span class="f">observe</span>(state, key, <span class="k">function</span>(value)
+<span class="ln">9</span>            <span class="f">render</span>(key, value)
+<span class="ln">10</span>        <span class="k">end</span>)
+<span class="ln">11</span>    <span class="k">end</span>
+<span class="ln">12</span>    <span class="k">return</span> <span class="k">function</span>() <span class="f">table.clear</span>(conns) <span class="k">end</span>
+<span class="ln">13</span><span class="k">end</span>
+<span class="ln">14</span>
+<span class="ln">15</span><span class="k">local</span> cleanup = <span class="f">UIBinder.bind</span>(Inventory.slots, <span class="k">function</span>(i, item)
+<span class="ln">16</span>    <span class="k">local</span> slot = grid:&#8203;<span class="f">FindFirstChild</span>(<span class="s">"Slot_"</span> .. i)
+<span class="ln">17</span>    <span class="k">if</span> <span class="k">not</span> slot <span class="k">then</span> <span class="k">return</span> <span class="k">end</span>
+<span class="ln">18</span>
+<span class="ln">19</span>    slot.ItemName.Text = item <span class="k">and</span> item.name <span class="k">or</span> <span class="s">""</span>
+<span class="ln">20</span>    slot.RarityBar.BackgroundColor3 = item
+<span class="ln">21</span>        <span class="k">and</span> <span class="f">Rarity[item.rarity]</span> <span class="k">or</span> <span class="f">Color3.fromHex</span>(<span class="s">"#2a2d3a"</span>)
+<span class="ln">22</span>
+<span class="ln">23</span>    <span class="f">TweenService</span>:<span class="f">Create</span>(slot, <span class="f">TweenInfo.new</span>(<span class="n">0.18</span>, Enum.EasingStyle.Quad),
+<span class="ln">24</span>        { BackgroundTransparency = <span class="n">0.15</span> }):<span class="f">Play</span>()
+<span class="ln">25</span><span class="k">end</span>)
+<span class="ln">26</span>screen.Destroying:<span class="f">Once</span>(cleanup)</code></pre>
+
+<pre class="code-panel" id="cp-save" role="tabpanel" aria-labelledby="ct-save" hidden><code><span class="ln">1</span><span class="k">local</span> SaveService = {}
+<span class="ln">2</span><span class="k">local</span> DataStoreService = game:<span class="f">GetService</span>(<span class="s">"DataStoreService"</span>)
+<span class="ln">3</span><span class="k">local</span> store = DataStoreService:<span class="f">GetDataStore</span>(<span class="s">"PlayerData_v3"</span>)
+<span class="ln">4</span>
+<span class="ln">5</span><span class="k">local</span> <span class="k">function</span> <span class="f">withRetry</span>(fn, attempts)
+<span class="ln">6</span>    <span class="k">for</span> i = <span class="n">1</span>, attempts <span class="k">do</span>
+<span class="ln">7</span>        <span class="k">local</span> ok, result = <span class="f">pcall</span>(fn)
+<span class="ln">8</span>        <span class="k">if</span> ok <span class="k">then</span> <span class="k">return</span> result <span class="k">end</span>
+<span class="ln">9</span>        <span class="f">task.wait</span>(<span class="n">2</span> ^ i) <span class="c">-- 2s, 4s, 8s…</span>
+<span class="ln">10</span>    <span class="k">end</span>
+<span class="ln">11</span>    <span class="k">return</span> <span class="k">nil</span>, <span class="s">"retry-exhausted"</span>
+<span class="ln">12</span><span class="k">end</span>
+<span class="ln">13</span>
+<span class="ln">14</span><span class="k">function</span> <span class="f">SaveService.load</span>(player)
+<span class="ln">15</span>    <span class="k">local</span> data = <span class="f">withRetry</span>(<span class="k">function</span>()
+<span class="ln">16</span>        <span class="k">return</span> store:<span class="f">GetAsync</span>(<span class="s">"u_"</span> .. player.UserId)
+<span class="ln">17</span>    <span class="k">end</span>, <span class="n">3</span>)
+<span class="ln">18</span>
+<span class="ln">19</span>    data = data <span class="k">or</span> <span class="f">Defaults.new</span>()  <span class="c">-- new player</span>
+<span class="ln">20</span>    <span class="f">migrate</span>(data)                    <span class="c">-- schema upgrades</span>
+<span class="ln">21</span>    Profiles[player] = data
+<span class="ln">22</span>    <span class="f">pushToClient</span>(player, data)
+<span class="ln">23</span><span class="k">end</span>
+<span class="ln">24</span>
+<span class="ln">25</span>Players.PlayerRemoving:<span class="f">Connect</span>(<span class="f">SaveService.save</span>)
+<span class="ln">26</span>game.<span class="f">BindToClose</span>(<span class="f">SaveService.saveAll</span>)</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <aside class="code-side">
+        <div class="code-note reveal" style="--d:.18s">
+          <span class="code-note__ico"><svg class="ico"><use href="#i-shield"/></svg></span>
+          <h4>Server stays in charge</h4>
+          <p>Every hit, purchase and stat change is checked on the server. The client predicts for feel — never for truth.</p>
+        </div>
+        <div class="code-note reveal" style="--d:.24s">
+          <span class="code-note__ico"><svg class="ico"><use href="#i-layers"/></svg></span>
+          <h4>UI binds to state</h4>
+          <p>One data table drives every frame. Update the table, the interface follows — no scattered <code>:SetText()</code> calls.</p>
+        </div>
+        <div class="code-note reveal" style="--d:.3s">
+          <span class="code-note__ico"><svg class="ico"><use href="#i-database"/></svg></span>
+          <h4>Assume the network fails</h4>
+          <p>Retries with backoff, autosave, session locks and migrations. Losing a player's progress is not an acceptable bug.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section" id="process" aria-label="Process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <span class="eyebrow"><i></i>How I work</span>
+        <h2 class="sec-title">From messy idea to<br /><span class="muted">playable in a week.</span></h2>
+      </div>
+      <p class="sec-sub reveal" style="--d:.08s">
+        I keep the loop short and visible. You see progress every couple of days
+        instead of one big reveal at the end that's three weeks off target.
+      </p>
+    </div>
+
+    <ol class="steps">
+      <li class="step reveal" style="--d:.02s">
+        <span class="step__num">01</span>
+        <div class="step__dot"></div>
+        <h3>Brief</h3>
+        <p>We talk about the game, the players, and the feeling you want. I write a short scope doc with deliverables and a price.</p>
+        <span class="step__meta">1–2 days</span>
+      </li>
+      <li class="step reveal" style="--d:.08s">
+        <span class="step__num">02</span>
+        <div class="step__dot"></div>
+        <h3>Wireframe</h3>
+        <p>Layout in Figma at real Roblox resolution. You approve structure before a single Frame gets built.</p>
+        <span class="step__meta">2 days</span>
+      </li>
+      <li class="step reveal" style="--d:.14s">
+        <span class="step__num">03</span>
+        <div class="step__dot"></div>
+        <h3>Build</h3>
+        <p>Frames, UIGridLayouts, tweens and states — built in Studio with scale-based sizing from the start.</p>
+        <span class="step__meta">3–5 days</span>
+      </li>
+      <li class="step reveal" style="--d:.2s">
+        <span class="step__num">04</span>
+        <div class="step__dot"></div>
+        <h3>Wire</h3>
+        <p>Luau behind the interface: remote events, cooldowns, inventories, data. Tested on mobile and desktop.</p>
+        <span class="step__meta">2–4 days</span>
+      </li>
+      <li class="step reveal" style="--d:.26s">
+        <span class="step__num">05</span>
+        <div class="step__dot"></div>
+        <h3>Polish</h3>
+        <p>Sound, shake, hover states, edge cases. Two rounds of revisions included, then handoff with docs.</p>
+        <span class="step__meta">1–2 days</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section section--alt" id="about" aria-label="About me">
+  <div class="wrap about">
+    <div class="about__visual reveal">
+      <div class="rig">
+        <div class="rig__card rig__card--a">
+          <span class="rig__label">UICorner</span>
+          <b>0, 14</b>
+        </div>
+        <div class="rig__card rig__card--b">
+          <span class="rig__label">Frame · Vitals</span>
+          <div class="rig__bars"><i style="width:74%"></i><i style="width:38%"></i></div>
+        </div>
+        <div class="rig__card rig__card--c">
+          <span class="rig__label">TweenInfo.new</span>
+          <b>0.22 · Quad</b>
+        </div>
+        <div class="rig__core">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <linearGradient id="rigGrad" x1="0" y1="0" x2="120" y2="120">
+                <stop stop-color="#8b7bff"/><stop offset="1" stop-color="#38e2c8"/>
+              </linearGradient>
+            </defs>
+            <rect x="10" y="10" width="100" height="100" rx="26" fill="none" stroke="url(#rigGrad)" stroke-width="1.6" opacity=".7"/>
+            <rect x="22" y="22" width="76" height="76" rx="20" fill="none" stroke="url(#rigGrad)" stroke-width="1.2" opacity=".45"/>
+            <path d="M60 36v48M44 50l16-14 16 14M44 70l16 14 16-14" stroke="url(#rigGrad)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>UI + Luau</span>
+        </div>
+      </div>
+      <div class="about__badge">
+        <b>4+</b><span>years building<br />in Studio</span>
+      </div>
+    </div>
+
+    <div class="about__copy">
+      <span class="eyebrow reveal"><i></i>About me</span>
+      <h2 class="sec-title reveal" style="--d:.05s">I got into scripting to make<br />a sword fight. I stayed for the UI.</h2>
+
+      <p class="reveal" style="--d:.1s">
+        I'm Jayden, a self-taught Roblox developer. It started with a combat system
+        that was mostly <em>RemoteEvents</em> and hope — then I realised the reason it
+        didn't feel good wasn't the code. It was that the player had no idea what was
+        happening. No hit flash, no cooldown, no readable health bar.
+      </p>
+      <p class="reveal" style="--d:.14s">
+        So I learned interface design. Now I build both halves: the clean screen and
+        the system behind it. I care about spacing, contrast and motion the same way
+        I care about server authority and DataStore safety.
+      </p>
+
+      <div class="about__cols reveal" style="--d:.18s">
+        <div>
+          <h4>What I'm good at</h4>
+          <ul class="ticks">
+            <li>Scalable UI that survives every screen size</li>
+            <li>Combat, abilities and cooldown systems</li>
+            <li>DataStore saves without data loss</li>
+            <li>UI/UX polish and game feel</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Tools I live in</h4>
+          <ul class="ticks ticks--alt">
+            <li>Roblox Studio · Luau</li>
+            <li>Figma for layout and specs</li>
+            <li>Blender for simple UI props</li>
+            <li>Git + Rojo for version control</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about__cta reveal" style="--d:.22s">
+        <a class="btn btn--primary" href="#contact">Work with me <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--ghost" href="https://github.com/jaydenwhite7714" target="_blank" rel="noopener">
+          <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact" aria-label="Contact">
+  <div class="wrap">
+    <div class="contact__card reveal">
+      <div class="contact__glow" aria-hidden="true"></div>
+      <div class="contact__grid-bg" aria-hidden="true"></div>
+
+      <span class="eyebrow eyebrow--center contact__eyebrow"><i></i>Let's talk</span>
+      <h2 class="contact__title">Got a game that needs<br /><span class="grad">a face?</span></h2>
+      <p class="contact__sub">
+        Tell me what you're building and what's missing. I'll reply with a scope,
+        a timeline and a price — usually within a day.
+      </p>
+
+      <div class="contact__actions">
+        <a class="btn btn--primary btn--lg" href="https://github.com/jaydenwhite7714" target="_blank" rel="noopener">
+          <svg class="ico" aria-hidden="true"><use href="#i-github"/></svg> Message me on GitHub
+        </a>
+        <button class="btn btn--ghost btn--lg" id="copyDiscord" data-handle="jaydenwhite">
+          <svg class="ico" aria-hidden="true"><use href="#i-discord"/></svg>
+          <span class="copy-label">Discord: jaydenwhite</span>
+          <svg class="ico ico--xs copy-ico" aria-hidden="true"><use href="#i-copy"/></svg>
+        </button>
+      </div>
+
+      <div class="contact__meta">
+        <span><i class="dot-live"></i> Typically replies in under 24h</span>
+        <span>·</span>
+        <span>Commissions &amp; long-term work</span>
+        <span>·</span>
+        <span>Time zone — US Eastern</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <span class="brand__mark brand__mark--sm" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><defs><linearGradient id="bm2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#8b7bff"/><stop offset="1" stop-color="#38e2c8"/></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="9" fill="url(#bm2)"/><path d="M12 9h3.4v9.6c0 2.6-1.6 4.2-4.2 4.2-1.6 0-2.9-.6-3.7-1.6l1.7-2c.5.6 1.1 1 1.9 1 1 0 1.5-.6 1.5-1.7V9Z" fill="#080a0f"/><path d="M19.4 9h2.9l-2.9 15h-2.9l2.9-15Z" fill="#080a0f" opacity=".55"/></svg>
+        </span>
+        <span class="brand__text"><strong>Jayden White</strong><em>Roblox UI &amp; Systems</em></span>
+      </a>
+      <p>Hand-built interfaces and systems for Roblox games. No free models, no templates.</p>
+    </div>
+
+    <nav class="footer__links" aria-label="Footer">
+      <div>
+        <h4>Work</h4>
+        <a href="#work">Projects</a>
+        <a href="#lab">UI Lab</a>
+        <a href="#code">Code samples</a>
+      </div>
+      <div>
+        <h4>Info</h4>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="https://github.com/jaydenwhite7714" target="_blank" rel="noopener">GitHub <svg class="ico ico--xs" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="https://www.roblox.com/" target="_blank" rel="noopener">Roblox <svg class="ico ico--xs" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#contact">Discord</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap footer__bottom">
+    <span>© <span id="year">2026</span> Jayden White. Built by hand with HTML, CSS &amp; vanilla JS.</span>
+    <span class="footer__host">Hosted on GitHub Pages <i class="dot-live"></i></span>
+  </div>
+</footer>
+
+<!-- ============ PROJECT MODAL ============ -->
+<div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel" role="document">
+    <button class="modal__close" data-close aria-label="Close"><svg class="ico"><use href="#i-close"/></svg></button>
+    <div class="modal__hero" id="modalHero" aria-hidden="true"></div>
+    <div class="modal__content">
+      <span class="chip" id="modalChip">Project</span>
+      <h3 id="modalTitle">Project</h3>
+      <p class="modal__lede" id="modalLede"></p>
+      <div class="modal__grid">
+        <div>
+          <h4>What I built</h4>
+          <ul class="ticks" id="modalList"></ul>
+        </div>
+        <div>
+          <h4>Stack</h4>
+          <div class="tags" id="modalTags"></div>
+          <h4 class="modal__h4-gap">Numbers</h4>
+          <ul class="modal__stats" id="modalStats"></ul>
+        </div>
+      </div>
+      <div class="modal__foot">
+        <span>Want something like this?</span>
+        <a class="btn btn--primary btn--sm" href="#contact" data-close>Start a project <svg class="ico ico--xs" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

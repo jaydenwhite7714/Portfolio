@@ -1,0 +1,9 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (not required to run the site — it's plain HTML/CSS/JS)
+node_modules/
+npm-debug.log*
